@@ -1,0 +1,75 @@
+.viewport{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:  100vh;
+    width:  100vw; 
+}
+
+.main-container{
+    width:  80%;
+    height:  90%;
+    margin-bottom: 20px;
+    margin-top:  20px;
+    background-color: rgb(149,  97,  97);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.head-container{
+    display: flex;
+    flex-direction: row;
+    padding: 0 20px 0 20px;
+    border: 1px solid black;
+
+    .header-line{
+        position: relative;
+        width: 80%;
+        height: 3px;
+        left: 10px;
+        top: 50%;
+        background-color: #000;
+    }
+}
+
+.game-container{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    border: 1px solid black;
+}
+
+.left-container{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    border: 1px solid black;
+}
+
+.location-container{
+    height: 50%;
+    border: 1px solid black;
+}
+
+.travel-container{
+    height: 50%;
+    border: 1px solid black;
+}
+
+.right-container{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    border: 1px solid black;
+}
+
+.status-container{
+    height: 200px;
+    border: 1px solid black;
+}
+
+.play-container{
+    height: 100%;
+    border: 1px solid black;
+}
