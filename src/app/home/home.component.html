@@ -19,18 +19,23 @@
                 <div class="status-container">
                     <p>Balance: ${{ balance }}</p>
                 </div>
-                <div class="play-container">
-                    <div class="inventory">
-                        <h2>Inventory</h2>
-                        <div class="item" *ngFor="let item of inventory">
-                            <p>{{ item.name }}: {{ item.quantity }}</p>
-                        </div>
-                    </div>
-                    <div class="market">
+                <div class="market-container">
+                    <div class="market-title">
                         <h2>Market</h2>
-                        <div class="item" *ngFor="let item of marketItems">
-                            <p>{{ item.name }}: ${{ item.price }}</p>
-                            <button (click)="buy(item)">Buy</button>
+                    </div>
+                    <div class="market-content">
+                        <div class="inventory">
+                            <h2>Inventory</h2>
+                            <div class="item" *ngFor="let item of inventory">
+                                <p>{{ item.name }}: {{ item.quantity }}</p>
+                            </div>
+                        </div>
+                        <div class="market">
+                            <h2>Buy</h2>
+                            <div class="item" *ngFor="let item of marketItems">
+                                <p>{{ item.name }}: ${{ item.price }}</p>
+                                <button (click)="buy(item)">Buy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
