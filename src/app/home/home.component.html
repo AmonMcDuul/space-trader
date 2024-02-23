@@ -1,37 +1,3 @@
-<!-- <div class="container">
-    <div class="header">
-        <h1>Space Trader</h1>
-        <div class="balance">
-            <p>Balance: ${{ balance }}</p>
-        </div>
-    </div>
-    <div class="personal">
-        <p>personal:</p>
-        <p>inventory:</p>
-    </div>
-    <div class="content">
-        <div class="inventory">
-            <h2>Inventory</h2>
-            <div class="item" *ngFor="let item of inventory">
-                <p>{{ item.name }}: {{ item.quantity }}</p>
-            </div>
-        </div>
-        <div class="market">
-            <h2>Market</h2>
-            <div class="item" *ngFor="let item of marketItems">
-                <p>{{ item.name }}: ${{ item.price }}</p>
-                <button (click)="buy(item)">Buy</button>
-            </div>
-        </div>
-    </div>
-    <div class="locations">
-        <h2>Locations</h2>
-        <button *ngFor="let location of locations" (click)="travel(location)">
-            {{ location }}
-        </button>
-    </div>
-</div> -->
-
 <div class="viewport">
     <div class="main-container">
         <div class="head-container">
@@ -42,13 +8,31 @@
             <div class="left-container">
                 <div class="location-container">aaa
                 </div>
-                <div class="travel-container">bbb
+                <div class="travel-container">
+                    <h2>Locations</h2>
+                    <button *ngFor="let location of locations" (click)="travel(location)">
+                        {{ location }}
+                    </button>
                 </div>
             </div>
             <div class="right-container">
-                <div class="status-container">ccc
+                <div class="status-container">
+                    <p>Balance: ${{ balance }}</p>
                 </div>
-                <div class="play-container">ddd
+                <div class="play-container">
+                    <div class="inventory">
+                        <h2>Inventory</h2>
+                        <div class="item" *ngFor="let item of inventory">
+                            <p>{{ item.name }}: {{ item.quantity }}</p>
+                        </div>
+                    </div>
+                    <div class="market">
+                        <h2>Market</h2>
+                        <div class="item" *ngFor="let item of marketItems">
+                            <p>{{ item.name }}: ${{ item.price }}</p>
+                            <button (click)="buy(item)">Buy</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
