@@ -6,19 +6,23 @@
         </div>
         <div class="game-container">
             <div class="left-container">
-                <div class="location-container">aaa
+                <div class="location-container">
+                    <p>Location: {{ gameState.locations.name }}</p>
+                    <p>Days passed: {{ gameState.daysPassed() }}</p>
+                    <p>Balance: {{ gameState.balance() }}</p>
+                    <p>Shield: {{ gameState.shield() }}</p>
+                    <p>Weapon: {{ gameState.weapon() }}</p>
                 </div>
                 <div class="travel-container">
                     <h2>Locations</h2>
-                    <button *ngFor="let location of locations" (click)="Travel(location)">
-                        {{ location }}
+                    <button *ngFor="let location of gameState.locations()" (click)="Travel(location.name)">
+                        {{ location.name }}
                     </button>
                 </div>
             </div>
             <div class="right-container">
                 <div class="status-container">
-                    <p>Balance: ${{ balance }}</p>
-                    <p>DaysPassed: {{ daysPassed }}</p>
+                    ...
                 </div>
                 <div class="market-container">
                     <div class="market-title">
@@ -27,14 +31,14 @@
                     <div class="market-content">
                         <div class="inventory">
                             <h2>Inventory</h2>
-                            <div class="item" *ngFor="let item of inventory">
+                            <div class="item" *ngFor="let item of gameState.inventory()">
                                 <p>{{ item.name }}: {{ item.quantity }} sellingPrice: ${{ item.price }}</p>
                                 <button (click)="Sell(item)">Sell</button>
                             </div>
                         </div>
                         <div class="market">
                             <h2>Buy</h2>
-                            <div class="item" *ngFor="let item of marketItems">
+                            <div class="item" *ngFor="let item of gameState.marketItems()">
                                 <p>{{ item.name }}: ${{ item.price }} quantity: {{ item.quantity }}</p>
                                 <button (click)="Buy(item)">Buy</button>
                             </div>
@@ -45,3 +49,44 @@
         </div>
     </div>
 </div>
+
+<!-- <div class="viewport">
+    <div class="main-container">
+        <div class="head-container">
+            <h1>Game</h1>
+            <div class="header-line"></div>
+        </div>
+        <div class="game-container">
+            <div class="left-container">
+                <div class="location-container">
+                    <p>Days passed: {{ gameState.daysPassed() }}</p>
+                    <p>Balance: {{ gameState.balance() }}</p>
+                    <p>Shield: {{ gameState.shield() }}</p>
+                    <p>Weapon: {{ gameState.weapon() }}</p>
+                    <button (click)="NextDay()">Next day</button>
+                    <button *ngFor="let location of gameState.locations()" (click)="Travel(location.name)">{{
+                        location.name }}</button>
+                </div>
+            </div>
+            <div class="right-container">
+                <div class="status-container">
+                    <h2>Inventory</h2>
+                    <ul>
+                        <li *ngFor="let item of gameState.inventory()">{{ item.name }} - {{ item.quantity }}</li>
+                    </ul>
+                </div>
+                <div class="market-container">
+                    <h2>Market</h2>
+                    <ul>
+                        <li *ngFor="let item of gameState.marketItems()">{{ item.name }} - {{ item.price }} - {{
+                            item.quantity }}</li>
+                    </ul>
+                    <button *ngFor="let item of gameState.inventory()" (click)="Sell(item)">Sell {{ item.name
+                        }}</button>
+                    <button *ngFor="let item of gameState.marketItems()" (click)="Buy(item)">Buy {{ item.name
+                        }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
