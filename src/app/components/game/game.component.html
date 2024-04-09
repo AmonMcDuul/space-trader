@@ -7,8 +7,8 @@
         <div class="game-container">
             <div class="left-container">
                 <div class="location-container">
-                    <p>Location: {{ gameState.locations.name }}</p>
-                    <p>Days passed: {{ gameState.daysPassed() }}</p>
+                    <p>Location: {{ gameState.currentLocation() }}</p>
+                    <p>Days passed: {{ gameState.daysPassed() }}/{{ gameLength }}</p>
                     <p>Balance: {{ gameState.balance() }}</p>
                     <p>Shield: {{ gameState.shield() }}</p>
                     <p>Weapon: {{ gameState.weapon() }}</p>
@@ -22,7 +22,7 @@
             </div>
             <div class="right-container">
                 <div class="status-container">
-                    ...
+                    <p [innerHtml]="tempText"></p>
                 </div>
                 <div class="market-container">
                     <div class="market-title">
@@ -49,44 +49,3 @@
         </div>
     </div>
 </div>
-
-<!-- <div class="viewport">
-    <div class="main-container">
-        <div class="head-container">
-            <h1>Game</h1>
-            <div class="header-line"></div>
-        </div>
-        <div class="game-container">
-            <div class="left-container">
-                <div class="location-container">
-                    <p>Days passed: {{ gameState.daysPassed() }}</p>
-                    <p>Balance: {{ gameState.balance() }}</p>
-                    <p>Shield: {{ gameState.shield() }}</p>
-                    <p>Weapon: {{ gameState.weapon() }}</p>
-                    <button (click)="NextDay()">Next day</button>
-                    <button *ngFor="let location of gameState.locations()" (click)="Travel(location.name)">{{
-                        location.name }}</button>
-                </div>
-            </div>
-            <div class="right-container">
-                <div class="status-container">
-                    <h2>Inventory</h2>
-                    <ul>
-                        <li *ngFor="let item of gameState.inventory()">{{ item.name }} - {{ item.quantity }}</li>
-                    </ul>
-                </div>
-                <div class="market-container">
-                    <h2>Market</h2>
-                    <ul>
-                        <li *ngFor="let item of gameState.marketItems()">{{ item.name }} - {{ item.price }} - {{
-                            item.quantity }}</li>
-                    </ul>
-                    <button *ngFor="let item of gameState.inventory()" (click)="Sell(item)">Sell {{ item.name
-                        }}</button>
-                    <button *ngFor="let item of gameState.marketItems()" (click)="Buy(item)">Buy {{ item.name
-                        }}</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->

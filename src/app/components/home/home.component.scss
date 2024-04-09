@@ -1,0 +1,86 @@
+.viewport{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:  100vh;
+    width:  100vw; 
+}
+
+.main-container{
+    width:  80%;
+    height:  90%;
+    margin-bottom: 20px;
+    margin-top:  20px;
+    background-color: rgb(255, 253, 249);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.head-container{
+    display: flex;
+    flex-direction: row;
+    padding: 0 20px 0 20px;
+
+    .header-line{
+        position: relative;
+        width: 80%;
+        height: 3px;
+        left: 10px;
+        top: 50%;
+        background-color: #000;
+    }
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+  
+.menu-item {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+  
+.menu-item:hover {
+    color: #ff0000;
+    text-decoration: underline;
+}
+  
+  .options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+  
+.game-length-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+  .game-length-button {
+    margin: 5px;
+}
+  
+  .game-length-button:hover {
+    background-color: #b38282;
+}
+  
+  .game-length-button.selected {
+    background-color: #b38282;
+}
+
+  .credits-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}

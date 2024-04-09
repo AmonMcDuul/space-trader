@@ -4,7 +4,6 @@ import { Location } from "../models/location";
 import { GameState } from "../models/gameState";
 
 export const seed = {
-    gameLength: 30,
     daysPassed: 0,
     balance: 100,
     shield: 0,

@@ -4,7 +4,7 @@ import { MarketItem } from './marketItem';
 import { Location } from './location';
 
 export class GameState {
-  gameLength = signal(0);
+  gameLength: number = 30;
   daysPassed = signal(0);
   balance = signal(0);
   shield = signal(0);
@@ -15,7 +15,7 @@ export class GameState {
   marketItems = signal<MarketItem[]>([]);
 
   constructor(
-    gameLength: number = 0,
+    gameLength: number = 30,
     daysPassed: number = 0,
     balance: number = 0,
     shield: number = 0,
@@ -25,7 +25,7 @@ export class GameState {
     inventory: InventoryItem[] = [],
     currentLocation: string = ""
   ) {
-    this.gameLength.set(gameLength);
+    this.gameLength = gameLength;
     this.daysPassed.set(daysPassed);
     this.balance.set(balance);
     this.shield.set(shield);
@@ -37,7 +37,7 @@ export class GameState {
   }
 
   EndGame() {
-    if (this.daysPassed() >= this.gameLength()) {
+    if (this.daysPassed() >= this.gameLength) {
       console.log('Ended game');
     }
   }

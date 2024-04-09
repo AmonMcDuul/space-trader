@@ -1,0 +1,27 @@
+<div class="viewport">
+    <div class="main-container">
+        <div class="head-container">
+            <h1>Space trader</h1>
+            <div class="header-line"></div>
+        </div>
+        <div class="menu-container">
+            <div class="menu-item" (click)="newGame()">Start new game</div>
+            <div class="menu-item" (click)="showOptions()">Game options</div>
+            <div class="menu-item" (click)="showCredits()">Credits</div>
+        </div>
+        <div class="options-container" *ngIf="showOptionsPanel">
+            <div class="game-length-buttons">
+                <p>Game length:</p>
+                <button class="game-length-button" *ngFor="let option of gameLengthOptions"
+                    (click)="selectGameLength(option)" [class.selected]="gameLength === option">
+                    {{ option }}
+                </button>
+            </div>
+            <p>{{ gameLength }} Days</p>
+        </div>
+        <div class="credits-container" *ngIf="showCreditsPanel">
+            <p>Created by</p>
+            Jorandiño
+        </div>
+    </div>
+</div>
