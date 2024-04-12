@@ -107,10 +107,9 @@ export class GameStateService {
 
   randomizePricesAndQuantities() {
     var randomNumberPrijs = 1 + (0.35 * (Math.random() - 0.5));
-    var randomNumberQuantity = Math.floor(Math.random() * 40) + 5;
     this.allMarketItems().forEach(element => {
         element.price = Math.round(element.price * randomNumberPrijs);
-        element.quantity = randomNumberQuantity;
+        element.quantity = Math.floor(Math.random() * 40) + 5;;
     });
     this.inventory().forEach(element => {
         element.price = Math.round(element.price * randomNumberPrijs);

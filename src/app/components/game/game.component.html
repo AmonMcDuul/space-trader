@@ -1,12 +1,14 @@
 <div class="viewport">
     <div class="main-container">
         <div class="head-container">
-            <h1>Space trader</h1>
+            <h1>SPACE TRADER</h1>
             <div class="header-line"></div>
         </div>
         <div class="game-container">
             <div class="left-container">
                 <div class="location-container">
+                    <h2>STATS</h2>
+                    <hr>
                     <p>Location: {{ gameState.currentLocation() }}</p>
                     <p>Days passed: {{ gameState.daysPassed() }}/{{ gameLength }}</p>
                     <p>Balance: {{ gameState.balance() }}</p>
@@ -21,7 +23,8 @@
                     </ul>
                 </div>
                 <div class="travel-container">
-                    <h2>Locations</h2>
+                    <h2>LOCATIONS</h2>
+                    <hr>
                     <button class="location-button" *ngFor="let location of gameState.locations()"
                         (click)="Travel(location.name)"
                         [class.selected]="location.name === gameState.currentLocation()">
@@ -34,52 +37,53 @@
                     <p [innerHtml]="tempText"></p>
                 </div>
                 <div class="market-container">
-                    <div class="market-title">
-                        <h2>Market</h2>
+                    <div class="inventory">
+                        <h2>INVENTORY</h2>
+                        <hr>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Qty</th>
+                                    <th>$</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of gameState.inventory()">
+                                    @if (item.quantity > 0) {
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>${{ item.price }}</td>
+                                    <td><button (click)="Sell(item)">Sell</button></td>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="market-content">
-                        <div class="inventory">
-                            <h2>Inventory</h2>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Qty</th>
-                                        <th>$</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of gameState.inventory()">
-                                        <td>{{ item.name }}</td>
-                                        <td>{{ item.quantity }}</td>
-                                        <td>${{ item.price }}</td>
-                                        <td><button (click)="Sell(item)">Sell</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="market">
-                            <h2>Shop</h2>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Qty</th>
-                                        <th>$</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of gameState.marketItems()">
-                                        <td>{{ item.name }}</td>
-                                        <td>{{ item.quantity }}</td>
-                                        <td>${{ item.price }}</td>
-                                        <td><button (click)="Buy(item)">Buy</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="market">
+                        <h2>MARKET</h2>
+                        <hr>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Qty</th>
+                                    <th>$</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of gameState.marketItems()">
+                                    @if (item.quantity > 0) {
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>${{ item.price }}</td>
+                                    <td><button (click)="Buy(item)">Buy</button></td>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
