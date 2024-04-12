@@ -51,12 +51,10 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let item of gameState.inventory()">
-                                        @if (item.quantity > 0) {
                                         <td>{{ item.name }}</td>
                                         <td>{{ item.quantity }}</td>
                                         <td>${{ item.price }}</td>
                                         <td><button (click)="Sell(item)">Sell</button></td>
-                                        }
                                     </tr>
                                 </tbody>
                             </table>

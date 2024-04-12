@@ -20,17 +20,7 @@ export class GameStateService {
   inventory = signal<InventoryItem[]>([]);
   locations = signal<Location[]>([]);
   allMarketItems = signal<MarketItem[]>([]);
-  marketItems = computed(() => {
-    const allItems = this.allMarketItems();
-    const numberOfItems = Math.floor(Math.random() * 5) + 4;
-    const selectedItems = [];
-    for (let i = 0; i < numberOfItems; i++) {
-      const index = Math.floor(Math.random() * allItems.length);
-      selectedItems.push(allItems[index]);
-      allItems.splice(index, 1);
-    }
-    return selectedItems;
-  });
+  marketItems = signal<MarketItem[]>([]);
 
   constructor(private router: Router) { }
 
@@ -52,6 +42,8 @@ export class GameStateService {
             this.allMarketItems.set(allMarketItems);
             this.inventory.set(inventory);
             this.currentLocation.set(currentLocation);
+            this.randomizeMarketItems();
+            this.randomizePricesAndQuantities();
     }
 
   EndGame() {
@@ -79,31 +71,33 @@ export class GameStateService {
 
   Buy(item: { name: string; price: number }) {
     if (this.balance() >= item.price) {
-      this.balance.update(balance => balance - item.price);
-      const inventoryItem = this.inventory().find(i => i.name === item.name);
-      const marketItem = this.marketItems().find(i => i.name === item.name);
-      if (inventoryItem && marketItem) {
-        marketItem.quantity--;
-        inventoryItem.quantity++;
-      } else {
-        this.inventory.update(inventory => [...inventory, { name: item.name, price: item.price, quantity: 1 }]);
-      }
-      console.log(`Bought ${item.name}`);
-    } else {
-      console.log('Not enough money');
+        const marketItem = this.marketItems().find(i => i.name === item.name);
+        if(marketItem && marketItem.quantity >= 1){
+            const inventoryItem = this.inventory().find(i => i.name === item.name);
+            this.balance.update(balance => balance - item.price);
+            marketItem.quantity--;
+            if (inventoryItem) {
+                inventoryItem.quantity++;
+            } else {
+                this.inventory.update(inventory => [...inventory, { name: item.name, price: item.price, quantity: 1 }]);
+            }
+            console.log(`Bought ${item.name}`);
+            } else {
+            console.log('Not enough money');
+            }
+        }
     }
-  }
 
   Sell(item: { name: string; price: number }) {
     const inventoryItem = this.inventory().find(i => i.name === item.name);
     if(inventoryItem && inventoryItem.quantity >= 1){
       const marketItem = this.marketItems().find(i => i.name === item.name);
       this.balance.update(balance => balance + item.price);
+      inventoryItem.quantity--;
       if (marketItem) {
           marketItem.quantity++;
-          inventoryItem.quantity--;
       } else {
-        this.allMarketItems.update(allMarketItems => [...allMarketItems, { name: item.name, price: item.price, quantity: 1 }]);
+        this.marketItems.update(marketItems => [...marketItems, { name: item.name, price: item.price, quantity: 1 }]);
       }
       console.log(`Sold ${item.name}`);
     } else {
@@ -112,17 +106,24 @@ export class GameStateService {
   }
 
   randomizePricesAndQuantities() {
+    var randomNumberPrijs = 1 + (0.35 * (Math.random() - 0.5));
+    var randomNumberQuantity = Math.floor(Math.random() * 40) + 5;
     this.allMarketItems().forEach(element => {
-        element.price = Math.round(element.price * (1 + (0.35 * (Math.random() - 0.5))));
-        element.quantity = Math.floor(Math.random() * 96) + 5
+        element.price = Math.round(element.price * randomNumberPrijs);
+        element.quantity = randomNumberQuantity;
     });
+    this.inventory().forEach(element => {
+        element.price = Math.round(element.price * randomNumberPrijs);
+    })
   }
 
   randomizeMarketItems() {
-    this.marketItems = computed(() => {
+    this.marketItems.update(marketItems => [])
       const allItems = this.allMarketItems();
-      const numberOfItems = Math.floor(Math.random() * 5) + 6;
-      return allItems.filter(() => Math.random() < 0.5).slice(0, numberOfItems);
-    });
+      const numberOfItems = Math.floor(Math.random() * 5) + 5;
+      var selectedMarketItems = allItems.filter(() => Math.random() < 0.5).slice(0, numberOfItems);
+      selectedMarketItems.forEach(item => {
+          this.marketItems.update(selectedMarketItems => [...selectedMarketItems, { name: item.name, price: item.price, quantity: item.quantity }]);
+      });
   }
 }
