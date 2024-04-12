@@ -1,8 +1,8 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { GameState } from '../../models/gameState';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { seed } from '../../seeder/seed';
 import { ActivatedRoute } from '@angular/router';
+import { GameStateService } from '../../services/gameState.service';
 
 @Component({
   selector: 'app-game',
@@ -12,17 +12,15 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './game.component.scss'
 })
 export class GameComponent {
-  gameState = new GameState();
   gameLength: number = 30;
   tempText: string = "";
   storyText: string = "Your spaceship is preparing for its journey to explore the wonders of space...\nYou have lots of goods to trade and should make big buck!\n\nYou notice you are low on fuel...\n\n..."
   
-  constructor(private route: ActivatedRoute){
+  constructor(private route: ActivatedRoute, public gameState: GameStateService){
     this.route.params.subscribe(params => {
       this.gameLength = params['gameLength']});
-    this.gameState = new GameState(this.gameLength, seed.daysPassed, seed.balance, seed.shield, seed.weapon, seed.locations, seed.marketItems, seed.inventory, seed.currentLocation);
+    this.gameState.CreateGameState(this.gameLength, seed.daysPassed, seed.balance, seed.shield, seed.weapon, seed.locations, seed.marketItems, seed.inventory, seed.currentLocation);
   }
-
 
   ngAfterViewInit() {
     this.typeWriter(this.storyText);
@@ -49,7 +47,6 @@ export class GameComponent {
 
   Travel(location: string) {
     this.gameState.Travel(location);
-    this.gameState.currentLocation.update(l => location)
   }
 
   Buy(item: { name: string; price: number }) {

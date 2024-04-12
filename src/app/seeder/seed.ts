@@ -1,12 +1,14 @@
 import { InventoryItem } from "../models/inventoryItem";
 import { MarketItem } from "../models/marketItem";
 import { Location } from "../models/location";
+import { Shield } from "../models/shield";
+import { Weapon } from "../models/weapon";
 
 export const seed = {
     daysPassed: 0,
     balance: 100,
-    shield: 0,
-    weapon: 0,
+    shield: new Shield("Basic shield", 20),
+    weapon: new Weapon("Basic lasers", 30),
     currentLocation: 'Earth',
     locations: [
         new Location('Earth'),
@@ -16,12 +18,13 @@ export const seed = {
         new Location('Triton moon base'),
         new Location('Neptune shipyard'),
         new Location('Pluto ice mines'),
+        new Location('Saturn ring city'),
+
         // new Location('Charon research station'),
         // new Location('Venus terraforming project'),
         // new Location('Mercury solar power plant'),
         // new Location('Asteroid belt mining colony'),
         // new Location('Jupiter orbit refinery'),
-        // new Location('Saturn ring city'),
         // new Location('Uranus defense perimeter')
     ],
     inventory: [
@@ -46,5 +49,5 @@ export const seed = {
         new MarketItem('Solar panels', 250, 1),
         new MarketItem('Artificial gravity', 900, 1),
         new MarketItem('Hydroponics system', 400, 1),
-    ]
+    ],
 }
