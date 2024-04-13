@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { seed } from '../../seeder/seed';
 import { ActivatedRoute } from '@angular/router';
 import { GameStateService } from '../../services/gameState.service';
+import { Location } from '../../models/location'
 
 @Component({
   selector: 'app-game',
@@ -19,7 +20,7 @@ export class GameComponent {
   constructor(private route: ActivatedRoute, public gameState: GameStateService){
     this.route.params.subscribe(params => {
       this.gameLength = params['gameLength']});
-    this.gameState.CreateGameState(this.gameLength, seed.daysPassed, seed.balance, seed.shield, seed.weapon, seed.locations, seed.marketItems, seed.inventory, seed.currentLocation);
+    this.gameState.CreateGameState(this.gameLength, seed.daysPassed, seed.balance, seed.fuel, seed.shield, seed.weapon, seed.locations, seed.marketItems, seed.inventory, seed.locations[0]);
   }
 
   ngAfterViewInit() {
@@ -45,7 +46,7 @@ export class GameComponent {
     this.gameState.NextDay();
   }
 
-  Travel(location: string) {
+  Travel(location: Location) {
     this.gameState.Travel(location);
   }
 

@@ -14,9 +14,10 @@ export class GameStateService {
   gameLength: number = 30;
   daysPassed = signal(0);
   balance = signal(0);
+  fuel = signal(0);
   shield = signal(new Shield("", 0));
   weapon = signal(new Weapon("", 0));
-  currentLocation = signal("");
+  currentLocation = signal(new Location("", 0));
   inventory = signal<InventoryItem[]>([]);
   locations = signal<Location[]>([]);
   allMarketItems = signal<MarketItem[]>([]);
@@ -27,15 +28,17 @@ export class GameStateService {
     CreateGameState(gameLength: number = 30,
         daysPassed: number = 0,
         balance: number = 0,
+        fuel: number = 30,
         shield: Shield,
         weapon: Weapon,
         locations: Location[] = [],
         allMarketItems: MarketItem[] = [],
         inventory: InventoryItem[] = [],
-        currentLocation: string = ""){
+        currentLocation: Location){
             this.gameLength = gameLength;
             this.daysPassed.set(daysPassed);
             this.balance.set(balance);
+            this.fuel.set(fuel);
             this.shield.set(shield);
             this.weapon.set(weapon);
             this.locations.set(locations);
@@ -63,10 +66,82 @@ export class GameStateService {
     }
   }
 
-  Travel(location: string) {
-    this.currentLocation.update(l => location)
-    console.log(`Traveling to ${location}`);
-    this.NextDay();
+  Travel(location: Location) {
+    if(this.usedFuel(this.currentLocation(), location)){
+      this.currentLocation.update(l => location)
+      console.log(`Traveling to ${location}`);
+      this.NextDay();
+    } else {
+      console.log('Not enough fuel');
+      alert('Not enough fuel');
+    }
+    
+  }
+
+  usedFuel(currentLocation: Location, newLocation: Location) {
+    var difference = Math.abs(currentLocation.distance - newLocation.distance);
+    if (difference === 0) {
+          return true;
+      }
+    var spendFuel = difference * 3;
+    if (difference === 1) {
+        if (this.checkFuel(spendFuel)) {
+            this.fuel.update(fuel => fuel - spendFuel);
+            return true;
+        } else {
+            return false;
+        }
+    } else if (difference === 2) {
+        if (this.checkFuel(spendFuel)) {
+            this.fuel.update(fuel => fuel - spendFuel);
+            return true;
+        } else {
+            return false;
+        }
+    } else if (difference === 3) {
+        if (this.checkFuel(spendFuel)) {
+            this.fuel.update(fuel => fuel - spendFuel);
+            return true;
+        } else {
+            return false;
+        }
+    } else if (difference === 4) {
+        if (this.checkFuel(spendFuel)) {
+            this.fuel.update(fuel => fuel - spendFuel);
+            return true;
+        } else {
+            return false;
+        }
+    } else if (difference === 5) {
+        if (this.checkFuel(spendFuel)) {
+            this.fuel.update(fuel => fuel - spendFuel);
+            return true;
+        } else {
+            return false;
+        }
+    } else if (difference === 6) {
+        if (this.checkFuel(spendFuel)) {
+            this.fuel.update(fuel => fuel - spendFuel);
+            return true;
+        } else {
+            return false;
+        }
+    } else if (difference === 7) {
+        if (this.checkFuel(spendFuel)) {
+            this.fuel.update(fuel => fuel - spendFuel);
+            return true;
+        } else {
+            return false;
+        }
+    } return false;
+}
+
+
+  checkFuel(usedFuel: number){
+    if(this.fuel() < usedFuel){
+      return false;
+    }
+    return true;
   }
 
   Buy(item: { name: string; price: number }) {
@@ -79,7 +154,11 @@ export class GameStateService {
             if (inventoryItem) {
                 inventoryItem.quantity++;
             } else {
+              if(item.name === "Fuel"){
+                this.fuel.update(fuel => fuel + 1)
+              } else{
                 this.inventory.update(inventory => [...inventory, { name: item.name, price: item.price, quantity: 1 }]);
+              }
             }
             console.log(`Bought ${item.name}`);
             } else {
@@ -109,7 +188,7 @@ export class GameStateService {
     var randomNumberPrijs = 1 + (0.35 * (Math.random() - 0.5));
     this.allMarketItems().forEach(element => {
         element.price = Math.round(element.price * randomNumberPrijs);
-        element.quantity = Math.floor(Math.random() * 40) + 5;;
+        element.quantity = Math.floor(Math.random() * 40) + 5;
     });
     this.inventory().forEach(element => {
         element.price = Math.round(element.price * randomNumberPrijs);
@@ -118,6 +197,9 @@ export class GameStateService {
 
   randomizeMarketItems() {
     this.marketItems.update(marketItems => [])
+    var fuelPrice = Math.round(3 * (1 + 1 * (Math.random() - 0.5)));
+    var fuelQuantity = Math.floor(Math.random() * 95 + 5);
+    this.marketItems.update(marketItems => [...marketItems, {name: "Fuel", price: fuelPrice, quantity: fuelQuantity}]);
       const allItems = this.allMarketItems();
       const numberOfItems = Math.floor(Math.random() * 5) + 5;
       var selectedMarketItems = allItems.filter(() => Math.random() < 0.5).slice(0, numberOfItems);

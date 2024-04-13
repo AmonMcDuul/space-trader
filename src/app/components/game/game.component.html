@@ -9,10 +9,10 @@
                 <div class="location-container">
                     <h2>STATS</h2>
                     <hr>
-                    <p>Location: {{ gameState.currentLocation() }}</p>
+                    <p>Location: {{ gameState.currentLocation().name }}</p>
                     <p>Days passed: {{ gameState.daysPassed() }}/{{ gameLength }}</p>
-                    <p>Balance: {{ gameState.balance() }}</p>
-                    <p>Fuel: 30/100</p>
+                    <p>Balance: ${{ gameState.balance() }}</p>
+                    <p>Fuel: {{ gameState.fuel() }}/100</p>
                     <p>Weapon: {{ gameState.weapon().name }}</p>
                     <ul>
                         <li>Attack: {{ gameState.weapon().attack }}</li>
@@ -26,8 +26,8 @@
                     <h2>LOCATIONS</h2>
                     <hr>
                     <button class="location-button" *ngFor="let location of gameState.locations()"
-                        (click)="Travel(location.name)"
-                        [class.selected]="location.name === gameState.currentLocation()">
+                        (click)="Travel(location)" [class.selected]="location === gameState.currentLocation()"
+                        [disabled]="location === gameState.currentLocation()">
                         {{ location.name }}
                     </button>
                 </div>
