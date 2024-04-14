@@ -45,31 +45,31 @@ export class GameStateService {
 
   constructor(private router: Router) { }
 
-    CreateGameState(gameLength: number = 30,
-        daysPassed: number = 0,
-        balance: number = 0,
-        fuel: number = 30,
-        shield: Shield,
-        weapon: Weapon,
-        locations: Location[] = [],
-        allMarketItems: MarketItem[] = [],
-        inventory: InventoryItem[] = [],
-        currentLocation: Location){
-            this.gameLength = gameLength;
-            this.daysPassed.set(daysPassed);
-            this.balance.set(balance);
-            this.fuel.set(fuel);
-            this.shield.set(shield);
-            this.weapon.set(weapon);
-            this.locations.set(locations);
-            this.allMarketItems.set(allMarketItems);
-            this.inventory.set(inventory);
-            this.currentLocation.set(currentLocation);
-            this.randomizeMarketItems();
-            this.randomizePricesAndQuantities();
+  CreateGameState(gameLength: number = 30,
+    daysPassed: number = 0,
+    balance: number = 0,
+    fuel: number = 30,
+    shield: Shield,
+    weapon: Weapon,
+    locations: Location[] = [],
+    allMarketItems: MarketItem[] = [],
+    inventory: InventoryItem[] = [],
+    currentLocation: Location){
+      this.gameLength = gameLength;
+      this.daysPassed.set(daysPassed);
+      this.balance.set(balance);
+      this.fuel.set(fuel);
+      this.shield.set(shield);
+      this.weapon.set(weapon);
+      this.locations.set(locations);
+      this.allMarketItems.set(allMarketItems);
+      this.inventory.set(inventory);
+      this.currentLocation.set(currentLocation);
+      this.randomizeMarketItems();
+      this.randomizePricesAndQuantities();
     }
 
-  EndGame() {
+  endGame() {
     if (this.daysPassed() >= this.gameLength) {
       console.log('Ended game');
       alert("game ended, you scored: " + this.balance())
@@ -77,20 +77,20 @@ export class GameStateService {
     }
   }
 
-  NextDay() {
+  nextDay() {
     this.daysPassed.update(days => days + 1);
     this.randomizePricesAndQuantities();
     this.randomizeMarketItems();
     if(this.daysPassed() > this.gameLength){
-        this.EndGame();
+        this.endGame();
     }
   }
 
-  Travel(location: Location) {
+  travel(location: Location) {
     if(this.usedFuel(this.currentLocation(), location)){
       this.currentLocation.update(l => location)
       console.log(`Traveling to ${location.name}`);
-      this.NextDay();
+      this.nextDay();
     } else {
       console.log('Not enough fuel');
       alert('Not enough fuel');
@@ -164,7 +164,7 @@ export class GameStateService {
     return true;
   }
 
-  Buy(item: { name: string; price: number }) {
+  buy(item: { name: string; price: number }) {
     if (this.balance() >= item.price) {
         const marketItem = this.marketItems().find(i => i.name === item.name);
         if(marketItem && marketItem.quantity >= 1){
@@ -189,7 +189,7 @@ export class GameStateService {
         }
     }
 
-  Sell(item: { name: string; price: number }) {
+  sell(item: { name: string; price: number }) {
     const inventoryItem = this.inventory().find(i => i.name === item.name);
     if(inventoryItem && inventoryItem.quantity >= 1){
       const marketItem = this.marketItems().find(i => i.name === item.name);

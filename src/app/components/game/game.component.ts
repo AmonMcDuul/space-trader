@@ -42,15 +42,15 @@ export class GameComponent {
     }, 30);
   }
   
-  Travel(location: Location) {
-    this.gameState.Travel(location);
+  travel(location: Location) {
+    this.gameState.travel(location);
   }
 
-  Buy(item: { name: string; price: number }) {
-    this.gameState.Buy(item);
+  buy(item: { name: string; price: number }) {
+    this.gameState.buy(item);
   }
 
-  Sell(item: { name: string; price: number }) {
-    this.gameState.Sell(item);
+  sell(item: { name: string; price: number }) {
+    this.gameState.sell(item);
   }
 }

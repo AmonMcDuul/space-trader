@@ -20,7 +20,7 @@
                     <h2>LOCATIONS</h2>
                     <hr>
                     <button class="location-button" *ngFor="let location of gameState.locations()"
-                        (click)="Travel(location)" [class.selected]="location === gameState.currentLocation()"
+                        (click)="travel(location)" [class.selected]="location === gameState.currentLocation()"
                         [disabled]="location === gameState.currentLocation()">
                         {{ location.name }}
                     </button>
@@ -49,7 +49,7 @@
                                     <td>{{ item.name }}</td>
                                     <td>{{ item.quantity }}</td>
                                     <td>${{ item.price }}</td>
-                                    <td><button (click)="Sell(item)">Sell</button></td>
+                                    <td><button (click)="sell(item)">Sell</button></td>
                                     }
                                 </tr>
                             </tbody>
@@ -74,7 +74,7 @@
                                     <td>{{ item.name }}</td>
                                     <td>{{ item.quantity }}</td>
                                     <td>${{ item.price }}</td>
-                                    <td><button (click)="Buy(item)">Buy</button></td>
+                                    <td><button (click)="buy(item)">Buy</button></td>
                                     }
                                 </tr>
                             </tbody>
