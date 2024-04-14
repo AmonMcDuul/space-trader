@@ -310,7 +310,7 @@ setStatusText(text: string){
   }
 
   checkSpecialDelivery(previous: SpecialDelivery){
-    if(previous.count === 0 && previous.name !== ""){
+    if(previous.count === 0 && previous.name != "Pending.."){
       console.log("Failed to deliver special parcel. $200 fine.");
       this.setStatusText("SPS - Failed to deliver special parcel. \n You get a $200 fine.\n")
       this.balance.update(balance => balance - 200);
@@ -318,7 +318,7 @@ setStatusText(text: string){
     }
     else{
       previous.countDown();
-      if(previous.name !== ""){
+      if(previous.name != "Pending.."){
         this.setStatusText(`SPS - You have ${this.specialDelivery().count} days left to deliver ${this.specialDelivery().name} to ${this.specialDelivery().destination}...\n`)
       }
       else{
