@@ -30,9 +30,9 @@ export const seed = {
         // new Location('Uranus defense perimeter')
     ],
     inventory: [
-        new InventoryItem('Raktajino', 3, 5),
-        new InventoryItem('Space biscuits', 7, 3),
-        new InventoryItem('Warp core', 100, 100),
+        new InventoryItem('Raktajino', 25, 5),
+        new InventoryItem('Space biscuits', 25, 3),
+        new InventoryItem('Communications', 350, 1),
     ],
     marketItems: [
         new MarketItem('Raktajino', 25, 5),
