@@ -310,15 +310,20 @@ setStatusText(text: string){
   }
 
   checkSpecialDelivery(previous: SpecialDelivery){
-    if(previous.count === 0){
+    if(previous.count === 0 && previous.name !== ""){
       console.log("Failed to deliver special parcel. $200 fine.");
-      this.setStatusText("Failed to deliver special parcel. \n You get a $200 fine.\n")
+      this.setStatusText("SPS - Failed to deliver special parcel. \n You get a $200 fine.\n")
       this.balance.update(balance => balance - 200);
       this.createRandomSpecialDelivery(previous);
     }
     else{
       previous.countDown();
-      this.setStatusText(`You have ${this.specialDelivery().count} days left to deliver ${this.specialDelivery().name} to ${this.specialDelivery().destination}...\n`)
+      if(previous.name !== ""){
+        this.setStatusText(`SPS - You have ${this.specialDelivery().count} days left to deliver ${this.specialDelivery().name} to ${this.specialDelivery().destination}...\n`)
+      }
+      else{
+        this.setStatusText(`SPS - No package to deliver.\n`)
+      }
     }
   }
 
@@ -352,7 +357,7 @@ setStatusText(text: string){
   }
 
   sellSpecialParcel(){
-    this.setStatusText(`Good job delivering the ${this.specialDelivery().name} to ${this.specialDelivery().destination}.\n You have earned $${this.specialDelivery().price}...\n`)
+    this.setStatusText(`SPS - Good job delivering the ${this.specialDelivery().name} to ${this.specialDelivery().destination}.\n You have earned $${this.specialDelivery().price}...\n`)
     this.balance.update(balance => balance + this.specialDelivery().price);
     this.specialDelivery.update(s => new SpecialDelivery("Pending..", "Pending..", 0));
     this.specialDelivery().countDown();
