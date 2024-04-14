@@ -169,19 +169,23 @@ export class GameStateService {
         const marketItem = this.marketItems().find(i => i.name === item.name);
         if(marketItem && marketItem.quantity >= 1){
             const inventoryItem = this.inventory().find(i => i.name === item.name);
-            this.balance.update(balance => balance - item.price);
             marketItem.quantity--;
             if (inventoryItem) {
                 inventoryItem.quantity++;
             } else {
               if(item.name === "Fuel"){
-                this.fuel.update(fuel => fuel + 1)
+                if(this.fuel() >= 100){
+                  console.log("You can't store any more fuel, it's just spilling away");
+                } else{
+                  this.fuel.update(fuel => fuel + 1)
+                }
               } else{
                 this.inventory.update(inventory => [...inventory, { name: item.name, price: item.price, quantity: 1 }]);
                 this.inventory().sort((a, b) => {
                   return a.name.localeCompare(b.name);});
               }
             }
+            this.balance.update(balance => balance - item.price);
             console.log(`Bought ${item.name}`);
             } else {
             console.log('Not enough money');
@@ -193,13 +197,13 @@ export class GameStateService {
     const inventoryItem = this.inventory().find(i => i.name === item.name);
     if(inventoryItem && inventoryItem.quantity >= 1){
       const marketItem = this.marketItems().find(i => i.name === item.name);
-      this.balance.update(balance => balance + item.price);
       inventoryItem.quantity--;
       if (marketItem) {
           marketItem.quantity++;
       } else {
         this.marketItems.update(marketItems => [...marketItems, { name: item.name, price: item.price, quantity: 1 }]);
       }
+      this.balance.update(balance => balance + item.price);
       console.log(`Sold ${item.name}`);
     } else {
       console.log('No item to sell');
