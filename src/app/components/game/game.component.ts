@@ -15,19 +15,19 @@ import { Location } from '../../models/location'
 export class GameComponent {
   gameLength: number = 30;
   tempText: string = "";
-  storyText: string = "Dear Special Parcel Service worker.\nBe sure to deliver the package before 3 days have passed.\n Failure to deliver will grant you a $200 fine. \n\nYou notice you are low on fuel..."
   
   constructor(private route: ActivatedRoute, public gameState: GameStateService){
     this.route.params.subscribe(params => {
       this.gameLength = params['gameLength']});
-    this.gameState.CreateGameState(this.gameLength, seed.daysPassed, seed.balance, seed.fuel, seed.shield, seed.weapon, seed.locations, seed.marketItems, seed.inventory, seed.locations[0]);
+    this.gameState.CreateGameState(this.gameLength, seed.daysPassed, seed.balance, seed.fuel, seed.shield, seed.weapon, seed.locations, seed.marketItems, seed.inventory, seed.locations[0], seed.statusText);
   }
 
   ngAfterViewInit() {
-    this.typeWriter(this.storyText);
+    this.typeWriter(this.gameState.statusText());
   }
 
   typeWriter(text: string) {
+    this.tempText = "";
     let index = 0;
     const interval = setInterval(() => {
       if (index < text.length) {
@@ -39,11 +39,13 @@ export class GameComponent {
       } else {
         clearInterval(interval);
       }
-    }, 30);
+    }, 10);
   }
   
   travel(location: Location) {
+    this.gameState.statusText.set("");
     this.gameState.travel(location);
+    this.typeWriter(this.gameState.statusText());
   }
 
   buy(item: { name: string; price: number }) {

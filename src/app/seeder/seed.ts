@@ -52,4 +52,5 @@ export const seed = {
         new MarketItem('Artificial gravity', 800, 1),
         new MarketItem('Hydroponics system', 400, 1),
     ],
+    statusText: "Dear Special Parcel Service worker.\nBe sure to deliver the package before 3 days have passed.\n Failure to deliver will grant you a $200 fine. \n\nYou notice you are low on fuel..\n."
 }

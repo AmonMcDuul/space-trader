@@ -47,15 +47,29 @@
 }
 
 .location-container{
-    height: 50%;
+    height: 46%;
     padding: 10px;
     border: 1px solid black;
     margin-bottom: 10px;
     font-weight: 700;
 }
 
+.stats{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between; 
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.stats-top{
+    margin-top: 16px;
+    border-top: 1px solid #ddd;
+}
+
 .travel-container{
-    height: 50%;
+    height: 46%;
     border: 1px solid black;
     padding: 10px;
 }
@@ -68,7 +82,7 @@
 }
 
 .status-container{
-    height: 200px;
+    height: 30%;
     border: 1px solid black;
     margin-bottom: 10px;
     padding: 10px;
@@ -79,8 +93,7 @@
 .market-container {
     display: flex;
     flex-direction: row;
-    height: 100%;
-    // overflow-y: auto;
+    height: 70%;
   }
   
   .inventory,

@@ -26,6 +26,7 @@ export class GameStateService {
   specialFireSale = signal("");
   specialScarcity = signal("");
   specialDelivery = signal(new SpecialDelivery("","",3));
+  statusText = signal("");
   originalItems = [
     new MarketItem('Raktajino', 25, 0),
     new MarketItem('Space biscuits', 25, 0),
@@ -56,7 +57,8 @@ export class GameStateService {
     locations: Location[] = [],
     allMarketItems: MarketItem[] = [],
     inventory: InventoryItem[] = [],
-    currentLocation: Location){
+    currentLocation: Location,
+    statusText: string){
       this.gameLength = gameLength;
       this.daysPassed.set(daysPassed);
       this.balance.set(balance);
@@ -68,13 +70,13 @@ export class GameStateService {
       this.inventory.set(inventory);
       this.currentLocation.set(currentLocation);
       this.specialDelivery = signal(new SpecialDelivery("","",3));
+      this.statusText.set(statusText);
       this.randomizeMarketItems();
       this.createRandomSpecialDelivery(this.specialDelivery());
     }
 
   endGame() {
     if (this.daysPassed() >= this.gameLength) {
-      console.log('Ended game');
       alert("game ended, you scored: " + this.balance())
       this.router.navigate(['/']);
     }
@@ -85,6 +87,7 @@ export class GameStateService {
     if(this.daysPassed() > this.gameLength){
         this.endGame();
     }
+    this.statusText.set("");
     this.randomizePricesAndQuantities();
     this.randomizeMarketItems();
     this.checkSpecialDelivery(this.specialDelivery());
@@ -94,13 +97,18 @@ export class GameStateService {
     if(this.usedFuel(this.currentLocation(), location)){
       this.currentLocation.update(l => location)
       console.log(`Traveling to ${location.name}`);
+      this.setStatusText(`You traveled to ${location.name}.\n`)
       this.nextDay();
     } else {
       console.log('Not enough fuel');
-      alert('Not enough fuel');
+      this.setStatusText(`You dont have enough fuel to travel to ${location.name}.\n`)
     }
     return this.marketItems, this.inventory;
   }
+
+setStatusText(text: string){
+  this.statusText.update(s => s + text)
+}
 
   usedFuel(currentLocation: Location, newLocation: Location) {
     var difference = Math.abs(currentLocation.distance - newLocation.distance);
@@ -180,6 +188,7 @@ export class GameStateService {
               if(item.name === "Fuel"){
                 if(this.fuel() >= 100){
                   console.log("You can't store any more fuel, it's just spilling away");
+                  this.setStatusText("You can't store any more fuel, it's just spilling away\n")
                 } else{
                   this.fuel.update(fuel => fuel + 1)
                 }
@@ -193,6 +202,7 @@ export class GameStateService {
             console.log(`Bought ${item.name}`);
             } else {
             console.log('Not enough money');
+            this.setStatusText(`You don't have enough money to buy ${item.name}.\n`)
             }
         }
     }
@@ -267,6 +277,7 @@ export class GameStateService {
       marketItem.price = Math.round(marketItem.price * multiplier);
       this.specialFireSale.set(marketItem.name)
       console.log(this.specialFireSale(), " IS ON FIRESALE!!!!")
+      this.setStatusText(`${this.specialFireSale()} IS ON FIRESALE!!!!\n`)
       };
     
     if(chanceScarcity >= 17){
@@ -275,6 +286,7 @@ export class GameStateService {
       marketItem.price = Math.round(marketItem.price * multiplier);
       this.specialScarcity.set(marketItem.name)
       console.log(this.specialScarcity(), " IS SCARSE!!!!")
+      this.setStatusText(`${this.specialScarcity()} IS SCARSE!!!!\n`)
     }
   }
 
@@ -300,11 +312,13 @@ export class GameStateService {
   checkSpecialDelivery(previous: SpecialDelivery){
     if(previous.count === 0){
       console.log("Failed to deliver special parcel. $200 fine.");
+      this.setStatusText("Failed to deliver special parcel. \n You get a $200 fine.\n")
       this.balance.update(balance => balance - 200);
       this.createRandomSpecialDelivery(previous);
     }
     else{
       previous.countDown();
+      this.setStatusText(`You have ${this.specialDelivery().count} days left to deliver ${this.specialDelivery().name} to ${this.specialDelivery().destination}...\n`)
     }
   }
 
@@ -332,11 +346,14 @@ export class GameStateService {
     } while (previous && previous.price === price);
     
     this.specialDelivery.update(sd => new SpecialDelivery(name, destination, price));
+    this.setStatusText(`A new delivery is ready.\n Please deliver ${this.specialDelivery().name} to ${this.specialDelivery().destination}...\n`)
+
     return;
   }
 
   sellSpecialParcel(){
     this.balance.update(balance => balance + this.specialDelivery().price);
+    this.setStatusText(`Good job delivering the ${this.specialDelivery().name} to ${this.specialDelivery().destination}.\n You have earned $${this.specialDelivery().price}...\n`)
     this.specialDelivery.update(s => new SpecialDelivery("Pending..", "Pending..", 0));
     this.specialDelivery().countDown();
   }

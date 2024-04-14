@@ -9,10 +9,22 @@
                 <div class="location-container">
                     <h2 class="MajorMonoDisplay">STATS</h2>
                     <hr>
-                    <p>Location: {{ gameState.currentLocation().name }}</p>
-                    <p>Days passed: {{ gameState.daysPassed() }}/{{ gameLength }}</p>
-                    <p>Balance: ${{ gameState.balance() }}</p>
-                    <p>Fuel: {{ gameState.fuel() }}/100</p>
+                    <div class="stats stats-top">
+                        <div>Location: </div>
+                        <div>{{ gameState.currentLocation().name }}</div>
+                    </div>
+                    <div class="stats">
+                        <div>Balance: </div>
+                        <div>${{ gameState.balance() }}</div>
+                    </div>
+                    <div class="stats">
+                        <div>Fuel: </div>
+                        <div>{{ gameState.fuel() }}/100</div>
+                    </div>
+                    <div class="stats">
+                        <div>Days passed: </div>
+                        <div>{{ gameState.daysPassed() }}/{{ gameLength }}</div>
+                    </div>
                     <!-- <p>Weapon: {{ gameState.weapon().name }}</p>
                     <p>Shield: {{ gameState.shield().name }}</p> -->
                 </div>
