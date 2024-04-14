@@ -15,7 +15,7 @@ import { Location } from '../../models/location'
 export class GameComponent {
   gameLength: number = 30;
   tempText: string = "";
-  storyText: string = "Your spaceship is preparing for its journey to explore the wonders of space...\nYou have lots of goods to trade and should make big buck!\n\nYou notice you are low on fuel...\n\n..."
+  storyText: string = "Dear Special Parcel Service worker.\nBe sure to deliver the package before 3 days have passed.\n Failure to deliver will grant you a $200 fine. \n\nYou notice you are low on fuel..."
   
   constructor(private route: ActivatedRoute, public gameState: GameStateService){
     this.route.params.subscribe(params => {
@@ -52,5 +52,9 @@ export class GameComponent {
 
   sell(item: { name: string; price: number }) {
     this.gameState.sell(item);
+  }
+
+  deliverSpecialDelivery(){
+    this.gameState.sellSpecialParcel();
   }
 }

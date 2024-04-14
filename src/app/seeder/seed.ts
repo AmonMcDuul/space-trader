@@ -3,6 +3,7 @@ import { MarketItem } from "../models/marketItem";
 import { Location } from "../models/location";
 import { Shield } from "../models/shield";
 import { Weapon } from "../models/weapon";
+import { SpecialDelivery } from "../models/specialDelivery";
 
 export const seed = {
     daysPassed: 0,
@@ -12,11 +13,11 @@ export const seed = {
     weapon: new Weapon("Basic lasers", 30),
     // currentLocation: 'Earth',
     locations: [
-        new Location('Earth', 1),
-        new Location('Mars', 2),
-        new Location('Io', 3),
-        new Location('Sun station', 4),
-        new Location('Triton moon base', 5),
+        new Location('Sun station', 1),
+        new Location('Mercury refinery', 2),
+        new Location('Earth', 3),
+        new Location('Mars base', 4),
+        new Location('Asteroid belt colony', 5),
         new Location('Saturn ring city', 6),
         new Location('Neptune shipyard', 7),
         new Location('Pluto ice mines', 8),
@@ -31,7 +32,7 @@ export const seed = {
     inventory: [
         new InventoryItem('Raktajino', 3, 5),
         new InventoryItem('Space biscuits', 7, 3),
-        new InventoryItem('Warp core', 100, 1),
+        new InventoryItem('Warp core', 100, 100),
     ],
     marketItems: [
         new MarketItem('Raktajino', 25, 5),

@@ -6,6 +6,7 @@ import { Location } from '../models/location';
 import { Shield } from '../models/shield';
 import { Weapon } from '../models/weapon';
 import { Router } from '@angular/router';
+import { SpecialDelivery } from '../models/specialDelivery';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class GameStateService {
   marketItems = signal<MarketItem[]>([]);
   specialFireSale = signal("");
   specialScarcity = signal("");
+  specialDelivery = signal(new SpecialDelivery("","",3));
   originalItems = [
     new MarketItem('Raktajino', 25, 0),
     new MarketItem('Space biscuits', 25, 0),
@@ -65,8 +67,9 @@ export class GameStateService {
       this.allMarketItems.set(allMarketItems);
       this.inventory.set(inventory);
       this.currentLocation.set(currentLocation);
+      this.specialDelivery = signal(new SpecialDelivery("","",3));
       this.randomizeMarketItems();
-      this.randomizePricesAndQuantities();
+      this.createRandomSpecialDelivery(this.specialDelivery());
     }
 
   endGame() {
@@ -79,11 +82,12 @@ export class GameStateService {
 
   nextDay() {
     this.daysPassed.update(days => days + 1);
-    this.randomizePricesAndQuantities();
-    this.randomizeMarketItems();
     if(this.daysPassed() > this.gameLength){
         this.endGame();
     }
+    this.randomizePricesAndQuantities();
+    this.randomizeMarketItems();
+    this.checkSpecialDelivery(this.specialDelivery());
   }
 
   travel(location: Location) {
@@ -154,7 +158,7 @@ export class GameStateService {
             return false;
         }
     } return false;
-}
+  }
 
 
   checkFuel(usedFuel: number){
@@ -291,5 +295,49 @@ export class GameStateService {
         }
       });
     });
+  }
+
+  checkSpecialDelivery(previous: SpecialDelivery){
+    if(previous.count === 0){
+      console.log("Failed to deliver special parcel. $200 fine.");
+      this.balance.update(balance => balance - 200);
+      this.createRandomSpecialDelivery(previous);
+    }
+    else{
+      previous.countDown();
+    }
+  }
+
+  createRandomSpecialDelivery(previous: SpecialDelivery) {
+    const destinations: string[] = ['Sun station', 'Mercury refinery', 'Earth', 'Mars base', 'Asteroid belt colony', 'Saturn ring city', 'Neptune shipyard', 'Pluto ice mines'];
+    const prices: number[] = [250, 375, 500, 625, 750, 875, 1000, 1125, 1250, 1375, 1500];
+    
+    let name: string;
+    let destination: string;
+    let fullDestinationName: string;
+    let price: number;
+
+    do {
+      const randomNumber = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+      name = `SPS-${randomNumber}`;
+    } while (previous && previous.name === name);
+    
+    do {
+      let num = Math.floor(Math.random() * destinations.length);
+      destination = destinations[num];
+    } while (previous && previous.destination === destination || destination === this.currentLocation().name);
+    
+    do {
+      price = prices[Math.floor(Math.random() * prices.length)];
+    } while (previous && previous.price === price);
+    
+    this.specialDelivery.update(sd => new SpecialDelivery(name, destination, price));
+    return;
+  }
+
+  sellSpecialParcel(){
+    this.balance.update(balance => balance + this.specialDelivery().price);
+    this.specialDelivery.update(s => new SpecialDelivery("Pending..", "Pending..", 0));
+    this.specialDelivery().countDown();
   }
 }
