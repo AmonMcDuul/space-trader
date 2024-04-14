@@ -316,6 +316,9 @@ setStatusText(text: string){
       this.balance.update(balance => balance - 200);
       this.createRandomSpecialDelivery(previous);
     }
+    else if(previous.count === 0 && previous.name == "Pending.."){
+      this.createRandomSpecialDelivery(previous);
+    }
     else{
       previous.countDown();
       if(previous.name != "Pending.."){
