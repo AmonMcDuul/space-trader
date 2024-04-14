@@ -22,6 +22,26 @@ export class GameStateService {
   locations = signal<Location[]>([]);
   allMarketItems = signal<MarketItem[]>([]);
   marketItems = signal<MarketItem[]>([]);
+  specialFireSale = signal("");
+  specialScarcity = signal("");
+  originalItems = [
+    new MarketItem('Raktajino', 25, 0),
+    new MarketItem('Space biscuits', 25, 0),
+    new MarketItem('Warp core', 1000, 0),
+    new MarketItem('Space fruit', 20, 0),
+    new MarketItem('Bolts', 100, 0),
+    new MarketItem('Iron', 150, 0),
+    new MarketItem('Plasma torch', 200, 0),
+    new MarketItem('Fuel rods', 50, 0),
+    new MarketItem('Medical supplies', 300, 0),
+    new MarketItem('Communications', 350, 0),
+    new MarketItem('Life support system', 500, 0),
+    new MarketItem('Navigation system', 200, 0),
+    new MarketItem('Robot arm', 180, 0),
+    new MarketItem('Solar panels', 120, 0),
+    new MarketItem('Artificial gravity', 800, 0),
+    new MarketItem('Hydroponics system', 400, 0),
+  ]
 
   constructor(private router: Router) { }
 
@@ -69,13 +89,13 @@ export class GameStateService {
   Travel(location: Location) {
     if(this.usedFuel(this.currentLocation(), location)){
       this.currentLocation.update(l => location)
-      console.log(`Traveling to ${location}`);
+      console.log(`Traveling to ${location.name}`);
       this.NextDay();
     } else {
       console.log('Not enough fuel');
       alert('Not enough fuel');
     }
-    
+    return this.marketItems, this.inventory;
   }
 
   usedFuel(currentLocation: Location, newLocation: Location) {
@@ -158,6 +178,8 @@ export class GameStateService {
                 this.fuel.update(fuel => fuel + 1)
               } else{
                 this.inventory.update(inventory => [...inventory, { name: item.name, price: item.price, quantity: 1 }]);
+                this.inventory().sort((a, b) => {
+                  return a.name.localeCompare(b.name);});
               }
             }
             console.log(`Bought ${item.name}`);
@@ -185,14 +207,17 @@ export class GameStateService {
   }
 
   randomizePricesAndQuantities() {
-    var randomNumberPrijs = 1 + (0.35 * (Math.random() - 0.5));
+    this.setMarketItemPrices();
     this.allMarketItems().forEach(element => {
-        element.price = Math.round(element.price * randomNumberPrijs);
+      var randomPrice = Math.round(element.price * (1 + (0.4 * Math.random() - 0.2)));
+      if(randomPrice < 5){
+        randomPrice = 5;
+      }
+        element.price = randomPrice;
         element.quantity = Math.floor(Math.random() * 40) + 5;
     });
-    this.inventory().forEach(element => {
-        element.price = Math.round(element.price * randomNumberPrijs);
-    })
+    this.specialMarketItems();
+    this.setInventoryPrices();
   }
 
   randomizeMarketItems() {
@@ -203,8 +228,64 @@ export class GameStateService {
       const allItems = this.allMarketItems();
       const numberOfItems = Math.floor(Math.random() * 5) + 5;
       var selectedMarketItems = allItems.filter(() => Math.random() < 0.5).slice(0, numberOfItems);
+      selectedMarketItems.sort((a, b) => {
+        return a.name.localeCompare(b.name);});
       selectedMarketItems.forEach(item => {
           this.marketItems.update(selectedMarketItems => [...selectedMarketItems, { name: item.name, price: item.price, quantity: item.quantity }]);
       });
+  }
+
+  specialMarketItems() {
+    if(this.daysPassed() < 1){
+      return;
+    }
+    this.specialFireSale.set("");
+    this.specialScarcity.set("");
+    var chanceFireSale = Math.round(Math.random() * 20);
+    var chanceScarcity = Math.round(Math.random() * 20);
+    var multiplier;
+    var randomNum = Math.floor(Math.random() * this.allMarketItems().length);
+    var randomNum2;
+    do {
+      randomNum2 = Math.floor(Math.random() * this.allMarketItems().length);
+    } while (randomNum === randomNum2);
+    
+    if(randomNum !== 0){
+      randomNum--;
+    }
+    if(chanceFireSale >= 17){
+      multiplier = Math.random() * (0.75 - 0.20) + 0.20; // Range: 20% to 75%
+      var marketItem = this.allMarketItems()[randomNum];
+      marketItem.price = Math.round(marketItem.price * multiplier);
+      this.specialFireSale.set(marketItem.name)
+      console.log(this.specialFireSale(), " IS ON FIRESALE!!!!")
+      };
+    
+    if(chanceScarcity >= 17){
+      multiplier = Math.random() * (5 - 1.7) + 1.7; // Range: 170% to 500%
+      var marketItem = this.allMarketItems()[randomNum2];
+      marketItem.price = Math.round(marketItem.price * multiplier);
+      this.specialScarcity.set(marketItem.name)
+      console.log(this.specialScarcity(), " IS SCARSE!!!!")
+    }
+  }
+
+  setInventoryPrices(){
+    this.inventory().forEach(inventoryItem => {
+      var allMarketItems = this.allMarketItems().find(m => m.name == inventoryItem.name)
+      if(allMarketItems){
+        inventoryItem.price = allMarketItems.price;
+      }
+    })
+  }
+
+  setMarketItemPrices(){
+    this.originalItems.forEach(origElement => {
+      this.allMarketItems().forEach(element => {
+        if(element.name === origElement.name){
+          element.price = origElement.price;
+        }
+      });
+    });
   }
 }

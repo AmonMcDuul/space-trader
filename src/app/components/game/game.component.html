@@ -13,14 +13,8 @@
                     <p>Days passed: {{ gameState.daysPassed() }}/{{ gameLength }}</p>
                     <p>Balance: ${{ gameState.balance() }}</p>
                     <p>Fuel: {{ gameState.fuel() }}/100</p>
-                    <p>Weapon: {{ gameState.weapon().name }}</p>
-                    <ul>
-                        <li>Attack: {{ gameState.weapon().attack }}</li>
-                    </ul>
-                    <p>Shield: {{ gameState.shield().name }}</p>
-                    <ul>
-                        <li>Block: {{ gameState.shield().block }}</li>
-                    </ul>
+                    <!-- <p>Weapon: {{ gameState.weapon().name }}</p>
+                    <p>Shield: {{ gameState.shield().name }}</p> -->
                 </div>
                 <div class="travel-container">
                     <h2>LOCATIONS</h2>
@@ -74,7 +68,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of gameState.marketItems()">
+                                <tr *ngFor="let item of gameState.marketItems()"
+                                    [ngClass]="{'firesale': item.name === gameState.specialFireSale(), 'scarcity': item.name === gameState.specialScarcity()}">
                                     @if (item.quantity > 0) {
                                     <td>{{ item.name }}</td>
                                     <td>{{ item.quantity }}</td>

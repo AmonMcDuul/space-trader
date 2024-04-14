@@ -109,7 +109,7 @@ tr {
 
 tbody {
     display: block;
-    height: 320px;
+    height: 340px;
     width: 100%;
     overflow-y: auto;
     overflow-x: auto;
@@ -177,3 +177,13 @@ tr:hover {
     color: #ffffff;
     margin-left: 5px;
   }
+
+.firesale {
+    color: green;
+    font-weight: 700;
+}
+
+.scarcity {
+    color: darkred;
+    font-weight: 700;
+}

@@ -42,10 +42,6 @@ export class GameComponent {
     }, 30);
   }
   
-  NextDay() {
-    this.gameState.NextDay();
-  }
-
   Travel(location: Location) {
     this.gameState.Travel(location);
   }
