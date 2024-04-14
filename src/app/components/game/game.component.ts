@@ -57,6 +57,8 @@ export class GameComponent {
   }
 
   deliverSpecialDelivery(){
+    this.gameState.statusText.set("");
     this.gameState.sellSpecialParcel();
+    this.typeWriter(this.gameState.statusText());
   }
 }

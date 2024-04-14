@@ -352,8 +352,8 @@ setStatusText(text: string){
   }
 
   sellSpecialParcel(){
-    this.balance.update(balance => balance + this.specialDelivery().price);
     this.setStatusText(`Good job delivering the ${this.specialDelivery().name} to ${this.specialDelivery().destination}.\n You have earned $${this.specialDelivery().price}...\n`)
+    this.balance.update(balance => balance + this.specialDelivery().price);
     this.specialDelivery.update(s => new SpecialDelivery("Pending..", "Pending..", 0));
     this.specialDelivery().countDown();
   }

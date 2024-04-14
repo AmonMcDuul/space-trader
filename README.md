@@ -25,3 +25,23 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Deploying github pages
+
+Add package:
+
+ng add angular-cli-ghpages
+
+if necessary delete gh-pages branch:
+
+git branch -D gh-pages
+
+git push origin --delete gh-pages
+
+To deploy:
+
+In angular.json change outputPath to docs:
+
+npm run build -- --configuration production --base-href "https://amonmcduul.github.io/space-trader/"
+
+npx angular-cli-ghpages --dir=docs/browser
