@@ -37,7 +37,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 10%;
 }
   
 .menu-item {
@@ -57,31 +57,53 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 40px;
 }
   
 .game-length-buttons {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
 }
 
   .game-length-button {
-    margin: 5px;
+    background-color: rgb(255, 253, 249);
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-family: 'KodeMono', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 10px 20px 10px 20px;
 }
   
   .game-length-button:hover {
-    background-color: #b38282;
+    background-color: #000000;
+    border: 2px solid #ffffff;
+    color: #ffffff;
 }
   
   .game-length-button.selected {
-    background-color: #b38282;
+    background-color: #000000;
+    border: 2px solid #ffffff;
+    color: #ffffff;
 }
 
   .credits-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 40px;
+}
+
+.htp-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px; 
+    margin-left: 30%;
+    margin-right: 30%;
 }

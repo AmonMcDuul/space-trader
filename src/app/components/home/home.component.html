@@ -7,21 +7,28 @@
         <div class="menu-container">
             <div class="menu-item" (click)="newGame()">Start new game</div>
             <div class="menu-item" (click)="showOptions()">Game options</div>
+            <div class="menu-item" (click)="showHowToPlay()">How to play</div>
             <div class="menu-item" (click)="showCredits()">Credits</div>
         </div>
         <div class="options-container" *ngIf="showOptionsPanel">
+            <h3>Game length</h3>
             <div class="game-length-buttons">
-                <p>Game length:</p>
                 <button class="game-length-button" *ngFor="let option of gameLengthOptions"
                     (click)="selectGameLength(option)" [class.selected]="gameLength === option">
                     {{ option }}
                 </button>
             </div>
-            <p>{{ gameLength }} Days</p>
+            <h3>{{ gameLength }} Days</h3>
+        </div>
+        <div class="htp-container" *ngIf="showHowToPlayPanel">
+            <h3>How to play</h3>
+            <p>You are a special parcel service worker. you have to deliver packages to different locations in the solar
+                system. If you fail to deliver the package in time you will be fined. The goal o your journey is to make
+                as much money as posible in the amount of days selected. bladieebladebla.</p>
         </div>
         <div class="credits-container" *ngIf="showCreditsPanel">
-            <p>Created by</p>
-            Jorandiño
+            <h3>Created by</h3>
+            <h3>Joran Schols, 2024</h3>
         </div>
     </div>
 </div>

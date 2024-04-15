@@ -21,16 +21,40 @@
     display: flex;
     flex-direction: row;
     padding: 0 20px 0 20px;
+    justify-content: space-between;
 
     .header-line{
-        position: relative;
-        width: 80%;
         height: 3px;
         left: 10px;
-        top: 50%;
+        margin-top: 50px;
+        margin-right: 20px;
         background-color: #000;
+        width: 60%;
     }
+
+    .menu-button {
+        margin-top: 30px;
+        background-color: rgb(255, 253, 249);
+        color: #000000;
+        border: 2px solid #000000;
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-family: 'KodeMono', monospace;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 5%;
+        height: 50%;
+      }
+      
+    .menu-button:hover {
+        background-color: #000000;
+        border: 2px solid #ffffff;
+        color: #ffffff;
+      }
 }
+
+
 
 .game-container{
     display: flex;
@@ -82,10 +106,10 @@
 }
 
 .status-container{
-    height: 30%;
+    height: 32%;
     border: 1px solid black;
     margin-bottom: 10px;
-    padding: 10px;
+    padding-left: 20px;
     background-color: #000000;
     color: #ddd;
 }
@@ -93,7 +117,7 @@
 .market-container {
     display: flex;
     flex-direction: row;
-    height: 70%;
+    height: 68%;
   }
   
   .inventory,
@@ -131,7 +155,7 @@ tr {
 .delivery-tr{
     th,
     td {
-        padding: 6px;
+        padding: 4px;
         text-align: left;
         border-bottom: 1px solid #ddd;
     }
@@ -155,7 +179,7 @@ tr {
 
 .inventory-tbody {
     display: block;
-    height: 240px;
+    height: 200px;
     width: 100%;
     overflow-y: auto;
     overflow-x: auto;
@@ -171,7 +195,7 @@ tr {
 
 th,
 td {
-    padding: 6px;
+    padding: 4px;
     text-align: left;
     border-bottom: 1px solid #ddd;
   }
@@ -236,13 +260,34 @@ tr:hover {
 .firesale {
     color: green;
     font-weight: 700;
+    // font-family: 'MajorMonoDisplay', monospace;
 }
 
 .scarcity {
     color: darkred;
     font-weight: 700;
+    // font-family: 'MajorMonoDisplay', monospace;
 }
 
 .MajorMonoDisplay {
     font-family: 'MajorMonoDisplay', monospace;
 }
+
+.general-button {
+    background-color: rgb(255, 253, 249);
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-family: 'KodeMono', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  
+.general-button:hover {
+    background-color: #000000;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+  }

@@ -3,6 +3,8 @@
         <div class="head-container">
             <h1 class="MajorMonoDisplay">SPACE TRADER</h1>
             <div class="header-line"></div>
+            <button (click)="restartGame()" class="menu-button">Restart</button>
+            <button (click)="quitGame()" class="menu-button">Quit</button>
         </div>
         <div class="game-container">
             <div class="left-container">
@@ -65,7 +67,8 @@
                                         <td>
                                             @if ( gameState.specialDelivery().destination ==
                                             gameState.currentLocation().name) {
-                                            <button (click)="deliverSpecialDelivery()">Deliver</button>}
+                                            <button class="general-button"
+                                                (click)="deliverSpecialDelivery()">Deliver</button>}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -89,7 +92,7 @@
                                     <td>{{ item.name }}</td>
                                     <td>{{ item.quantity }}</td>
                                     <td>${{ item.price }}</td>
-                                    <td><button (click)="sell(item)">Sell</button></td>
+                                    <td><button class="general-button" (click)="sell(item)">Sell</button></td>
                                     }
                                 </tr>
                             </tbody>
@@ -114,7 +117,7 @@
                                     <td>{{ item.name }}</td>
                                     <td>{{ item.quantity }}</td>
                                     <td>${{ item.price }}</td>
-                                    <td><button (click)="buy(item)">Buy</button></td>
+                                    <td><button class="general-button" (click)="buy(item)">Buy</button></td>
                                     }
                                 </tr>
                             </tbody>

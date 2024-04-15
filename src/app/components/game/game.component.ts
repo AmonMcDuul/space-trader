@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { seed } from '../../seeder/seed';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GameStateService } from '../../services/gameState.service';
 import { Location } from '../../models/location'
 
@@ -16,7 +16,7 @@ export class GameComponent {
   gameLength: number = 30;
   tempText: string = "";
   
-  constructor(private route: ActivatedRoute, public gameState: GameStateService){
+  constructor(private route: ActivatedRoute, private router: Router, public gameState: GameStateService){
     this.route.params.subscribe(params => {
       this.gameLength = params['gameLength']});
     this.gameState.CreateGameState(this.gameLength, seed.daysPassed, seed.balance, seed.fuel, seed.shield, seed.weapon, seed.locations, seed.marketItems, seed.inventory, seed.locations[2], seed.statusText);
@@ -60,5 +60,14 @@ export class GameComponent {
     this.gameState.statusText.set("");
     this.gameState.sellSpecialParcel();
     this.typeWriter(this.gameState.statusText());
+  }
+
+  restartGame(){
+    this.gameState.CreateGameState(this.gameLength, seed.daysPassed, seed.balance, seed.fuel, seed.shield, seed.weapon, seed.locations, seed.marketItems, seed.inventory, seed.locations[2], seed.statusText);
+    this.typeWriter(this.gameState.statusText());
+  }
+
+  quitGame(){
+    this.router.navigate(['/']);
   }
 }

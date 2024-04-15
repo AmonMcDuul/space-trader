@@ -271,7 +271,7 @@ setStatusText(text: string){
     if(randomNum !== 0){
       randomNum--;
     }
-    if(chanceFireSale >= 17){
+    if(chanceFireSale >= 7){
       multiplier = Math.random() * (0.75 - 0.20) + 0.20; // Range: 20% to 75%
       var marketItem = this.allMarketItems()[randomNum];
       marketItem.price = Math.round(marketItem.price * multiplier);
@@ -280,7 +280,7 @@ setStatusText(text: string){
       this.setStatusText(`${this.specialFireSale()} IS ON FIRESALE!!!!\n`)
       };
     
-    if(chanceScarcity >= 17){
+    if(chanceScarcity >= 7){
       multiplier = Math.random() * (5 - 1.7) + 1.7; // Range: 170% to 500%
       var marketItem = this.allMarketItems()[randomNum2];
       marketItem.price = Math.round(marketItem.price * multiplier);
@@ -336,7 +336,6 @@ setStatusText(text: string){
     
     let name: string;
     let destination: string;
-    let fullDestinationName: string;
     let price: number;
 
     do {

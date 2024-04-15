@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class HomeComponent {
   showOptionsPanel = false;
   showCreditsPanel = false;
+  showHowToPlayPanel = false;
   gameLength = 30;
   gameLengthOptions = [30, 60, 90, 120];
 
@@ -25,6 +26,7 @@ export class HomeComponent {
   showOptions() {
     this.showOptionsPanel = true;
     this.showCreditsPanel = false;
+    this.showHowToPlayPanel = false;
   }
 
   selectGameLength(length: number) {
@@ -34,5 +36,12 @@ export class HomeComponent {
   showCredits() {
     this.showOptionsPanel = false;
     this.showCreditsPanel = true;
+    this.showHowToPlayPanel = false;
+  }
+
+  showHowToPlay() {
+    this.showOptionsPanel = false;
+    this.showCreditsPanel = false;
+    this.showHowToPlayPanel = true;
   }
 }
