@@ -115,7 +115,7 @@ setStatusText(text: string){
     if (difference === 0) {
           return true;
       }
-    var spendFuel = difference * 3;
+    var spendFuel = difference * 10;
     if (difference === 1) {
         if (this.checkFuel(spendFuel)) {
             this.fuel.update(fuel => fuel - spendFuel);
@@ -190,7 +190,7 @@ setStatusText(text: string){
                   console.log("You can't store any more fuel, it's just spilling away");
                   this.setStatusText("You can't store any more fuel, it's just spilling away\n")
                 } else{
-                  this.fuel.update(fuel => fuel + 1)
+                  this.fuel.update(fuel => fuel + 10)
                 }
               } else{
                 this.inventory.update(inventory => [...inventory, { name: item.name, price: item.price, quantity: 1 }]);
@@ -240,8 +240,8 @@ setStatusText(text: string){
 
   randomizeMarketItems() {
     this.marketItems.update(marketItems => [])
-    var fuelPrice = Math.round(3 * (1 + 1 * (Math.random() - 0.5)));
-    var fuelQuantity = Math.floor(Math.random() * 95 + 5);
+    var fuelPrice = Math.round(75 * (1 + 1 * (Math.random() - 0.5)));
+    var fuelQuantity = Math.floor(Math.random() *  10);
     this.marketItems.update(marketItems => [...marketItems, {name: "Fuel", price: fuelPrice, quantity: fuelQuantity}]);
       const allItems = this.allMarketItems();
       const numberOfItems = Math.floor(Math.random() * 5) + 5;
@@ -332,7 +332,7 @@ setStatusText(text: string){
 
   createRandomSpecialDelivery(previous: SpecialDelivery) {
     const destinations: string[] = ['Sun station', 'Mercury refinery', 'Earth', 'Mars base', 'Asteroid belt colony', 'Saturn ring city', 'Neptune shipyard', 'Pluto ice mines'];
-    const prices: number[] = [250, 375, 500, 625, 750, 875, 1000, 1125, 1250, 1375, 1500];
+    const prices: number[] = [100, 150, 250, 350, 500, 550, 600, 650, 750, 850, 1000];
     
     let name: string;
     let destination: string;
