@@ -88,6 +88,7 @@ export class GameStateService {
         this.endGame();
     }
     this.statusText.set("");
+    this.setStatusText(`You traveled to ${this.currentLocation().name}.\n`)
     this.randomizePricesAndQuantities();
     this.randomizeMarketItems();
     this.checkSpecialDelivery(this.specialDelivery());
@@ -97,7 +98,6 @@ export class GameStateService {
     if(this.usedFuel(this.currentLocation(), location)){
       this.currentLocation.update(l => location)
       console.log(`Traveling to ${location.name}`);
-      this.setStatusText(`You traveled to ${location.name}.\n`)
       this.nextDay();
     } else {
       console.log('Not enough fuel');
@@ -311,9 +311,9 @@ setStatusText(text: string){
 
   checkSpecialDelivery(previous: SpecialDelivery){
     if(previous.count === 0 && previous.name != "Pending.."){
-      console.log("Failed to deliver special parcel. $200 fine.");
-      this.setStatusText("SPS - Failed to deliver special parcel. \n You get a $200 fine.\n")
-      this.balance.update(balance => balance - 200);
+      console.log("Failed to deliver special parcel. $500 fine.");
+      this.setStatusText("SPS - Failed to deliver special parcel. \n You get a $500 fine.\n")
+      this.balance.update(balance => balance - 500);
       this.createRandomSpecialDelivery(previous);
     }
     else if(previous.count === 0 && previous.name == "Pending.."){
