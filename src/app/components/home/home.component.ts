@@ -15,7 +15,7 @@ export class HomeComponent {
   showCreditsPanel = false;
   showHowToPlayPanel = false;
   gameLength = 30;
-  gameLengthOptions = [30, 60, 90, 120];
+  gameLengthOptions = [15, 30, 60, 90];
 
   constructor(private router: Router) {}
   
