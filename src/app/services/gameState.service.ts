@@ -107,7 +107,7 @@ export class GameStateService {
   }
 
 setStatusText(text: string){
-  this.statusText.update(s => s + text)
+  this.statusText.update(s => s + text);
 }
 
   usedFuel(currentLocation: Location, newLocation: Location) {
@@ -188,9 +188,11 @@ setStatusText(text: string){
               if(item.name === "Fuel"){
                 if(this.fuel() >= 100){
                   console.log("You can't store any more fuel, it's just spilling away");
+                  this.statusText.set("");
                   this.setStatusText("You can't store any more fuel, it's just spilling away\n")
                 } else{
                   this.fuel.update(fuel => fuel + 10)
+                  marketItem.quantity = marketItem.quantity - 9;
                 }
               } else{
                 this.inventory.update(inventory => [...inventory, { name: item.name, price: item.price, quantity: 1 }]);
@@ -200,12 +202,13 @@ setStatusText(text: string){
             }
             this.balance.update(balance => balance - item.price);
             console.log(`Bought ${item.name}`);
-            } else {
-            console.log('Not enough money');
-            this.setStatusText(`You don't have enough money to buy ${item.name}.\n`)
-            }
-        }
+            } 
+    }else {
+      console.log('Not enough money');
+      this.statusText.set("");
+      this.setStatusText(`You don't have enough money to buy ${item.name}.\n`);
     }
+  }
 
   sell(item: { name: string; price: number }) {
     const inventoryItem = this.inventory().find(i => i.name === item.name);
@@ -241,7 +244,10 @@ setStatusText(text: string){
   randomizeMarketItems() {
     this.marketItems.update(marketItems => [])
     var fuelPrice = Math.round(75 * (1 + 1 * (Math.random() - 0.5)));
-    var fuelQuantity = Math.floor(Math.random() *  10);
+    var fuelQuantity = Math.floor(Math.random() *  10) * 10;
+    if(fuelQuantity === 0){
+      fuelQuantity = 10;
+    }
     this.marketItems.update(marketItems => [...marketItems, {name: "Fuel", price: fuelPrice, quantity: fuelQuantity}]);
       const allItems = this.allMarketItems();
       const numberOfItems = Math.floor(Math.random() * 5) + 5;

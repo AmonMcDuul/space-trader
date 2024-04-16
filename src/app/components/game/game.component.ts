@@ -15,7 +15,8 @@ import { Location } from '../../models/location'
 export class GameComponent {
   gameLength: number = 30;
   tempText: string = "";
-  
+  busyTypeWriter: boolean = false;
+
   constructor(private route: ActivatedRoute, private router: Router, public gameState: GameStateService){
     this.route.params.subscribe(params => {
       this.gameLength = params['gameLength']});
@@ -27,19 +28,23 @@ export class GameComponent {
   }
 
   typeWriter(text: string) {
-    this.tempText = "";
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index < text.length) {
-        this.tempText += text.charAt(index);
-        if (text.charAt(index) === '\n') {
-          this.tempText += '<br>';
+    if(!this.busyTypeWriter){
+      this.busyTypeWriter = true;
+      this.tempText = "";
+      let index = 0;
+      const interval = setInterval(() => {
+        if (index < text.length) {
+          this.tempText += text.charAt(index);
+          if (text.charAt(index) === '\n') {
+            this.tempText += '<br>';
+          }
+          index++;
+        } else {
+          clearInterval(interval);
+          this.busyTypeWriter = false;
         }
-        index++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 10);
+      }, 10);
+    }
   }
   
   travel(location: Location) {
@@ -50,6 +55,7 @@ export class GameComponent {
 
   buy(item: { name: string; price: number }) {
     this.gameState.buy(item);
+    this.typeWriter(this.gameState.statusText());
   }
 
   sell(item: { name: string; price: number }) {
