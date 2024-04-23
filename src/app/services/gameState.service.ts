@@ -115,7 +115,7 @@ setStatusText(text: string){
     if (difference === 0) {
           return true;
       }
-    var spendFuel = difference * 10;
+    var spendFuel = difference * 1;
     if (difference === 1) {
         if (this.checkFuel(spendFuel)) {
             this.fuel.update(fuel => fuel - spendFuel);
@@ -186,13 +186,13 @@ setStatusText(text: string){
                 inventoryItem.quantity++;
             } else {
               if(item.name === "Fuel"){
-                if(this.fuel() >= 100){
+                if(this.fuel() >= 10){
                   console.log("You can't store any more fuel, it's just spilling away");
                   this.statusText.set("");
                   this.setStatusText("You can't store any more fuel, it's just spilling away\n")
                 } else{
-                  this.fuel.update(fuel => fuel + 10)
-                  marketItem.quantity = marketItem.quantity - 9;
+                  this.fuel.update(fuel => fuel + 1)
+                  marketItem.quantity = marketItem.quantity;
                 }
               } else{
                 this.inventory.update(inventory => [...inventory, { name: item.name, price: item.price, quantity: 1 }]);
