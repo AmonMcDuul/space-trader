@@ -90,4 +90,8 @@ export class GameComponent implements AfterViewInit {
   quitGame() {
     this.router.navigate(['/']);
   }
+
+  notYet() {
+    alert('Not yet implemented')
+  }
 }
