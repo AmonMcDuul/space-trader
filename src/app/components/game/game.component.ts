@@ -94,4 +94,9 @@ export class GameComponent implements AfterViewInit {
   notYet() {
     alert('Not yet implemented')
   }
+
+  waitADay() {
+    this.gameState.travel(this.gameState.currentLocation());
+    this.typeWriter(this.gameState.statusText());
+  }
 }

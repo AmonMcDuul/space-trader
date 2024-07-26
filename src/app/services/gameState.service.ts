@@ -89,8 +89,6 @@ export class GameStateService {
     if(this.daysPassed() > this.gameLength){
         this.endGame();
     }
-    this.specialPrint = `\nYou traveled to ${this.currentLocation().name}.\n`;
-    // this.setStatusText(`\nYou traveled to ${this.currentLocation().name}.\n`)
     this.randomizePricesAndQuantities();
     this.randomizeMarketItems();
     this.checkSpecialDelivery(this.specialDelivery());
@@ -100,7 +98,13 @@ export class GameStateService {
 
   travel(location: Location) {
     if(this.usedFuel(this.currentLocation(), location)){
-      this.currentLocation.update(l => location)
+      if(this.currentLocation().name == location.name){
+        this.specialPrint = `\nYou have stayed on ${this.currentLocation().name}.\n`;
+      }
+      else{
+        this.currentLocation.update(l => location)
+        this.specialPrint = `\nYou traveled to ${this.currentLocation().name}.\n`;
+      }
       this.nextDay();
     } else {
       this.setStatusText(`You dont have enough fuel to travel to ${location.name}.\n`)
@@ -118,65 +122,13 @@ export class GameStateService {
     if (difference === 0) {
           return true;
       }
-    var spendFuel = difference * 1;
-    if (difference === 1) {
-        if (this.checkFuel(spendFuel)) {
+    var spendFuel = difference;
+        if (this.fuel() >= spendFuel) {
             this.fuel.update(fuel => fuel - spendFuel);
             return true;
         } else {
             return false;
         }
-    } else if (difference === 2) {
-        if (this.checkFuel(spendFuel)) {
-            this.fuel.update(fuel => fuel - spendFuel);
-            return true;
-        } else {
-            return false;
-        }
-    } else if (difference === 3) {
-        if (this.checkFuel(spendFuel)) {
-            this.fuel.update(fuel => fuel - spendFuel);
-            return true;
-        } else {
-            return false;
-        }
-    } else if (difference === 4) {
-        if (this.checkFuel(spendFuel)) {
-            this.fuel.update(fuel => fuel - spendFuel);
-            return true;
-        } else {
-            return false;
-        }
-    } else if (difference === 5) {
-        if (this.checkFuel(spendFuel)) {
-            this.fuel.update(fuel => fuel - spendFuel);
-            return true;
-        } else {
-            return false;
-        }
-    } else if (difference === 6) {
-        if (this.checkFuel(spendFuel)) {
-            this.fuel.update(fuel => fuel - spendFuel);
-            return true;
-        } else {
-            return false;
-        }
-    } else if (difference === 7) {
-        if (this.checkFuel(spendFuel)) {
-            this.fuel.update(fuel => fuel - spendFuel);
-            return true;
-        } else {
-            return false;
-        }
-    } return false;
-  }
-
-
-  checkFuel(usedFuel: number){
-    if(this.fuel() < usedFuel){
-      return false;
-    }
-    return true;
   }
 
   buy(item: { name: string; price: number }) {
