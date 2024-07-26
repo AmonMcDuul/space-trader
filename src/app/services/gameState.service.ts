@@ -87,8 +87,7 @@ export class GameStateService {
     if(this.daysPassed() > this.gameLength){
         this.endGame();
     }
-    this.statusText.set("");
-    this.setStatusText(`You traveled to ${this.currentLocation().name}.\n`)
+    this.setStatusText(`\nYou traveled to ${this.currentLocation().name}.\n`)
     this.randomizePricesAndQuantities();
     this.randomizeMarketItems();
     this.checkSpecialDelivery(this.specialDelivery());
@@ -97,18 +96,17 @@ export class GameStateService {
   travel(location: Location) {
     if(this.usedFuel(this.currentLocation(), location)){
       this.currentLocation.update(l => location)
-      console.log(`Traveling to ${location.name}`);
       this.nextDay();
     } else {
-      console.log('Not enough fuel');
       this.setStatusText(`You dont have enough fuel to travel to ${location.name}.\n`)
     }
     return this.marketItems, this.inventory;
   }
 
-setStatusText(text: string){
-  this.statusText.update(s => s + text);
-}
+  setStatusText(text: string){
+    this.statusText.set("");
+    this.statusText.update(s => s + text);
+  }
 
   usedFuel(currentLocation: Location, newLocation: Location) {
     var difference = Math.abs(currentLocation.distance - newLocation.distance);
@@ -187,8 +185,6 @@ setStatusText(text: string){
             } else {
               if(item.name === "Fuel"){
                 if(this.fuel() >= 10){
-                  console.log("You can't store any more fuel, it's just spilling away");
-                  this.statusText.set("");
                   this.setStatusText("You can't store any more fuel, it's just spilling away\n")
                 } else{
                   this.fuel.update(fuel => fuel + 1)
@@ -201,11 +197,9 @@ setStatusText(text: string){
               }
             }
             this.balance.update(balance => balance - item.price);
-            console.log(`Bought ${item.name}`);
+            this.setStatusText(`You have bought ${item.name}.\n`);
             } 
-    }else {
-      console.log('Not enough money');
-      this.statusText.set("");
+    } else {
       this.setStatusText(`You don't have enough money to buy ${item.name}.\n`);
     }
   }
@@ -221,7 +215,8 @@ setStatusText(text: string){
         this.marketItems.update(marketItems => [...marketItems, { name: item.name, price: item.price, quantity: 1 }]);
       }
       this.balance.update(balance => balance + item.price);
-      console.log(`Sold ${item.name}`);
+      this.setStatusText(`You have sold ${item.name}.\n`);
+      console.log(item.name)
     } else {
       console.log('No item to sell');
     }

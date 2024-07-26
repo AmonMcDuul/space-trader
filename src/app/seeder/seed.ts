@@ -3,7 +3,6 @@ import { MarketItem } from "../models/marketItem";
 import { Location } from "../models/location";
 import { Shield } from "../models/shield";
 import { Weapon } from "../models/weapon";
-import { SpecialDelivery } from "../models/specialDelivery";
 
 export const seed = {
     daysPassed: 0,
@@ -11,7 +10,6 @@ export const seed = {
     fuel: 2,
     shield: new Shield("Basic shield", 20),
     weapon: new Weapon("Basic lasers", 30),
-    // currentLocation: 'Earth',
     locations: [
         new Location('Sun station', 1),
         new Location('Mercury refinery', 2),
@@ -21,13 +19,6 @@ export const seed = {
         new Location('Saturn ring city', 6),
         new Location('Neptune shipyard', 7),
         new Location('Pluto ice mines', 8),
-
-        // new Location('Charon research station'),
-        // new Location('Venus terraforming project'),
-        // new Location('Mercury solar power plant'),
-        // new Location('Asteroid belt mining colony'),
-        // new Location('Jupiter orbit refinery'),
-        // new Location('Uranus defense perimeter')
     ],
     inventory: [
         new InventoryItem('Raktajino', 5, 5),
@@ -52,5 +43,5 @@ export const seed = {
         new MarketItem('Artificial gravity', 150, 1),
         new MarketItem('Hydroponics system', 200, 1),
     ],
-    statusText: "Dear Special Parcel Service worker.\nBe sure to deliver the package before 3 days have passed.\n Failure to deliver will grant you a $500 fine. \n\nYou notice you are low on fuel..\n."
+    statusText: "Dear Special Parcel Service worker.\nBe sure to deliver the package before 3 days have passed.\n Failure to deliver will grant you a $500 fine. \n\nYou notice you are low on fuel..\n"
 }
