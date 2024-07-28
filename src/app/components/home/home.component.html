@@ -8,10 +8,10 @@
             </button>
         </div>
         <div class="menu-container">
-            <div class="menu-item" (click)="newGame()">Start new game</div>
-            <div class="menu-item" (click)="showOptions()">Game options</div>
-            <div class="menu-item" (click)="showHowToPlay()">How to play</div>
-            <div class="menu-item" (click)="showCredits()">Credits</div>
+            <div class="menu-item" (click)="newGame()">StArt neW gAMe</div>
+            <div class="menu-item" (click)="showOptions()">GAMe opTions</div>
+            <div class="menu-item" (click)="showHowToPlay()">HoW To plAY</div>
+            <div class="menu-item" (click)="showCredits()">CRediTs</div>
 
         </div>
         <div class="options-container" *ngIf="showOptionsPanel">
@@ -22,17 +22,16 @@
                     {{ option }}
                 </button>
             </div>
-            <h3>{{ gameLength }} Days</h3>
+            <h3>{{ gameLength }} DAYS</h3>
         </div>
         <div class="htp-container" *ngIf="showHowToPlayPanel">
             <h3>How to play</h3>
-            <p>You are a special parcel service worker. you have to deliver packages to different locations in the solar
-                system. If you fail to deliver the package in time you will be fined. The goal o your journey is to make
-                as much money as posible in the amount of days selected. bladieebladebla.</p>
+            <p>YOU are a SPECIAL PARCEL SERVICE worker. YOU have to deliver packages to different locations in the SOLAR SYSTEM. If YOU FAIL to deliver the PACKAGE in time you will be fined. The goal of YOUR journey is to make
+                as much MONEY as posible in the amount of days selected. BLADIEBLAADIEBLAAA.</p>
         </div>
         <div class="credits-container" *ngIf="showCreditsPanel">
-            <h3>Created by</h3>
-            <h3>Joran Schols, 2024</h3>
+            <h3>CReated by</h3>
+            <h3>JORAN SchoLS, 2024</h3>
         </div>
     </div>
 </div>
