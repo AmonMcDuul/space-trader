@@ -1,0 +1,40 @@
+.light-theme {
+  // --body-color: #1d1d1d;
+  --body-color: #000000;
+  --background-color: #ececec;
+  --text-color: #1d1d1d;
+  --second-text-color: #ececec;
+  --border-color: #1d1d1d;
+  --headerline-color: #1d1d1d;
+  --background-color-hover: #1d1d1d;
+  --text-color-hover: #ececec;
+  --border-color-hover: #ececec;
+  --icon-color: #1d1d1d;
+  --table-header-color: #1d1d1d; 
+  --table-sub-border-color: #ddd;
+  --status-container-color: #000000;
+  --status-text-color: #ddd;
+  --firesale: green;
+  --scarcity: darkred;
+}
+
+.dark-theme {
+  // --body-color: #ececec;
+  --body-color: #000000;
+  --background-color: #1d1d1d;
+  --text-color: #ececec;
+  --second-text-color: #1d1d1d;
+  --border-color: #ececec;
+  --headerline-color: #ececec;
+  --background-color-hover: #ececec;
+  --text-color-hover: #1d1d1d;
+  --border-color-hover: #1d1d1d;
+  --icon-color: #ececec;
+  --table-header-color: #ececec; 
+  --table-sub-border-color: #3f3f3f;
+  --status-container-color: #000000;
+  --status-text-color: #ddd;
+  --firesale: green;
+  --scarcity: darkred;
+}
+
