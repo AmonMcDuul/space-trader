@@ -4,11 +4,14 @@ import { seed } from '../../seeder/seed';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameStateService } from '../../services/gameState.service';
 import { Location } from '../../models/location'
+import { ThemeService } from '../../services/theme.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'] // Corrected the attribute name to styleUrls
 })
@@ -16,14 +19,29 @@ export class GameComponent implements AfterViewInit {
   gameLength: number = 30;
   tempText: string = "";
   busyTypeWriter: boolean = false;
+  themeBool: boolean = !localStorage.getItem('themeBool');
+  faCircleHalfStroke = faCircleHalfStroke;
 
   @ViewChild('statusContainer') statusContainer!: ElementRef;  
   
-  constructor(private route: ActivatedRoute, private router: Router, public gameState: GameStateService) {
+  constructor(private route: ActivatedRoute, private router: Router, public gameState: GameStateService, protected themeService: ThemeService) {
     this.route.params.subscribe(params => {
       this.gameLength = params['gameLength']
     });
     this.gameState.CreateGameState(this.gameLength, seed.daysPassed, seed.balance, seed.fuel, seed.shield, seed.weapon, seed.locations, seed.marketItems, seed.inventory, seed.locations[2], seed.statusText);
+  }
+
+  ngOnInit(){
+    if (typeof window !== 'undefined') {
+      const storedThemeBool = localStorage.getItem('themeBool');
+      this.themeBool = storedThemeBool ? JSON.parse(storedThemeBool) : false;
+    }
+    if(this.themeBool){
+      this.themeService.set('light');
+    }
+    else{
+      this.themeService.set('dark');
+    }
   }
 
   ngAfterViewInit() {
@@ -98,5 +116,11 @@ export class GameComponent implements AfterViewInit {
   waitADay() {
     this.gameState.travel(this.gameState.currentLocation());
     this.typeWriter(this.gameState.statusText());
+  }
+
+  setTheme(){
+    this.themeBool = !this.themeBool;
+    localStorage.setItem('themeBool', JSON.stringify(this.themeBool));
+    this.themeService.change();
   }
 }

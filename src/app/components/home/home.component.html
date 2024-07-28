@@ -3,12 +3,16 @@
         <div class="head-container">
             <h1>SPACE TRADER</h1>
             <div class="header-line"></div>
+            <button (click)="setTheme()" class="icon-button">
+                <fa-icon [icon]="faCircleHalfStroke" class="icon"></fa-icon>
+            </button>
         </div>
         <div class="menu-container">
             <div class="menu-item" (click)="newGame()">Start new game</div>
             <div class="menu-item" (click)="showOptions()">Game options</div>
             <div class="menu-item" (click)="showHowToPlay()">How to play</div>
             <div class="menu-item" (click)="showCredits()">Credits</div>
+
         </div>
         <div class="options-container" *ngIf="showOptionsPanel">
             <h3>Game length</h3>

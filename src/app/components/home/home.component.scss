@@ -1,3 +1,5 @@
+@import '../../../assets/styles/themes.scss';
+
 .viewport{
     display: flex;
     justify-content: center;
@@ -12,10 +14,10 @@
     height:  98%;
     margin-bottom: 20px;
     margin-top:  20px;
-    background-color: rgb(255, 253, 249);
+    background-color: var(--background-color);
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    border: 1px solid var(--border-color);
 }
 
 .head-container{
@@ -29,7 +31,7 @@
         height: 3px;
         left: 10px;
         top: 50%;
-        background-color: #000;
+        background-color: var(--headerline-color);
     }
 }
 
@@ -68,9 +70,9 @@
 }
 
   .game-length-button {
-    background-color: rgb(255, 253, 249);
-    color: #000000;
-    border: 2px solid #000000;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
     border-radius: 5px;
     text-transform: uppercase;
     font-family: 'KodeMono', monospace;
@@ -81,15 +83,15 @@
 }
   
   .game-length-button:hover {
-    background-color: #000000;
-    border: 2px solid #ffffff;
-    color: #ffffff;
+    background-color: var(--background-color-hover);
+    border: 2px solid var(--border-color-hover);;
+    color: var(--text-color-hover);
 }
   
   .game-length-button.selected {
-    background-color: #000000;
-    border: 2px solid #ffffff;
-    color: #ffffff;
+    background-color: var(--background-color-hover);
+    border: 2px solid var(--border-color-hover);;
+    color: var(--text-color-hover);
 }
 
   .credits-container {
@@ -107,3 +109,20 @@
     margin-left: 30%;
     margin-right: 30%;
 }
+
+.icon-button {
+    border: 0px;
+    background-color: transparent;
+    padding: 5px;
+    margin: 10px 0px 10px 10px;
+    color: var(--icon-color);
+    opacity: 0.3;
+  }
+  
+  .icon-button:hover {
+    opacity: 1;
+  }
+  
+  .icon {
+    font-size: 24px;
+  }
