@@ -13,7 +13,8 @@ export class ApiService {
 
   getHighScore(): Observable<any>{
     const url = `${this.apiUrl}/SpaceTrader/highscore`;
-    return this.http.get<any>(url);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.get<any>(url, {headers});
   }
 
   sendHighScore(gameState: number, score: number, alias: string): Observable<any> {
