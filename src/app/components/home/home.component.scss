@@ -110,6 +110,13 @@
     margin-right: 30%;
 }
 
+.highscores-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
 .icon-button {
     border: 0px;
     background-color: transparent;

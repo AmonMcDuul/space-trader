@@ -9,10 +9,13 @@
         </div>
         <div class="menu-container">
             <div class="menu-item" (click)="newGame()">StArt neW gAMe</div>
+            <div class="menu-item" (click)="showHighScores()">hiGhscoRes</div>
             <div class="menu-item" (click)="showOptions()">GAMe opTions</div>
-            <div class="menu-item" (click)="showHowToPlay()">HoW To plAY</div>
+            <div class="menu-item" (click)="showHowToPlay()">hoW To plAY</div>
             <div class="menu-item" (click)="showCredits()">CRediTs</div>
-
+        </div>
+        <div class="highscores-container" *ngIf="showHighScoresPanel">
+            <app-highscore></app-highscore>
         </div>
         <div class="options-container" *ngIf="showOptionsPanel">
             <h3>Game length</h3>
@@ -25,12 +28,12 @@
             <h3>{{ gameLength }} DAYS</h3>
         </div>
         <div class="htp-container" *ngIf="showHowToPlayPanel">
-            <h3>How to play</h3>
+            <h3>how to play</h3>
             <p>YOU are a SPECIAL PARCEL SERVICE worker. YOU have to deliver packages to different locations in the SOLAR SYSTEM. If YOU FAIL to deliver the PACKAGE in time you will be fined. The goal of YOUR journey is to make
                 as much MONEY as posible in the amount of days selected. BLADIEBLAADIEBLAAA.</p>
         </div>
         <div class="credits-container" *ngIf="showCreditsPanel">
-            <h3>CReated by</h3>
+            <h3>CReATed bY</h3>
             <h3>JORAN SchoLS, 2024</h3>
         </div>
     </div>

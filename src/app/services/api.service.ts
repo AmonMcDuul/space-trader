@@ -11,8 +11,13 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+  getHighScore(): Observable<any>{
+    const url = `${this.apiUrl}/SpaceTrader/highscore`;
+    return this.http.get<any>(url);
+  }
+
   sendHighScore(gameState: number, score: number, alias: string): Observable<any> {
-    const url = `${this.apiUrl}/SpaceTrader/score`;
+    const url = `${this.apiUrl}/SpaceTrader/highscore`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const payload = { gameState, score, alias };
 

@@ -5,18 +5,20 @@ import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import { ThemeService } from '../../services/theme.service';
+import { HighscoreComponent } from "../highscore/highscore.component";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule, FontAwesomeModule],
+  imports: [CommonModule, FormsModule, FontAwesomeModule, HighscoreComponent],
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
   showOptionsPanel = false;
   showCreditsPanel = false;
   showHowToPlayPanel = false;
+  showHighScoresPanel = false;
   gameLength = 30;
   gameLengthOptions = [15, 30, 60, 90];
   themeBool: boolean = false;
@@ -45,6 +47,7 @@ export class HomeComponent {
     this.showOptionsPanel = true;
     this.showCreditsPanel = false;
     this.showHowToPlayPanel = false;
+    this.showHighScoresPanel = false;
   }
 
   selectGameLength(length: number) {
@@ -55,12 +58,21 @@ export class HomeComponent {
     this.showOptionsPanel = false;
     this.showCreditsPanel = true;
     this.showHowToPlayPanel = false;
+    this.showHighScoresPanel = false;
   }
 
   showHowToPlay() {
     this.showOptionsPanel = false;
     this.showCreditsPanel = false;
     this.showHowToPlayPanel = true;
+    this.showHighScoresPanel = false;
+  }
+
+  showHighScores() {
+    this.showOptionsPanel = false;
+    this.showCreditsPanel = false;
+    this.showHowToPlayPanel = false;
+    this.showHighScoresPanel = true;
   }
 
   setTheme(){
