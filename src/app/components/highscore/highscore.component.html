@@ -1,20 +1,26 @@
 <div class="highscore-container">
-    <h2>High Scores</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Alias</th>
-          <th>Score</th>
-          <th>Game Type</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let highScore of highScores">
-          <td>{{ highScore.alias }}</td>
-          <td>{{ highScore.score }}</td>
-          <td>{{ highScore.gametypeState }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <h2>hiGh ScoRes</h2>
+  <div class="tabs">
+    <button *ngFor="let tab of tabs; let i = index" (click)="selectTab(i)" [class.active]="selectedTab === i">
+      {{ getTabText(tab) }}
+    </button>
   </div>
-  
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>AliAs</th>
+        <th>ScoRe</th>
+        <!-- <th>Game Type</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let highScore of filteredHighScores; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ highScore.alias }}</td>
+        <td>{{ highScore.score }}</td>
+        <!-- <td>{{ highScore.gametype }}</td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>

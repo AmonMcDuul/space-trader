@@ -1,11 +1,11 @@
 export class HighScore {
   alias: string;
   score: number;
-  gametypeState: number;
+  gametype: number;
 
-  constructor(alias: string, score: number, gametypeState: number) {
+  constructor(alias: string, score: number, gametype: number) {
     this.alias = alias;
     this.score = score;
-    this.gametypeState = gametypeState;
+    this.gametype = gametype;
   }
 }
