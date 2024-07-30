@@ -19,6 +19,7 @@ export class GameComponent implements AfterViewInit {
   gameLength: number = 30;
   tempText: string = "";
   busyTypeWriter: boolean = false;
+  selectedTheme: string = 'light';
   themeBool: boolean = !localStorage.getItem('themeBool');
   faCircleHalfStroke = faCircleHalfStroke;
 
@@ -33,14 +34,9 @@ export class GameComponent implements AfterViewInit {
 
   ngOnInit(){
     if (typeof window !== 'undefined') {
-      const storedThemeBool = localStorage.getItem('themeBool');
-      this.themeBool = storedThemeBool ? JSON.parse(storedThemeBool) : false;
-    }
-    if(this.themeBool){
-      this.themeService.set('light');
-    }
-    else{
-      this.themeService.set('dark');
+      const storedTheme = localStorage.getItem('selectedTheme');
+      this.selectedTheme = storedTheme ? storedTheme : 'light';
+      this.themeService.set(this.selectedTheme);
     }
   }
 
@@ -118,9 +114,7 @@ export class GameComponent implements AfterViewInit {
     this.typeWriter(this.gameState.statusText());
   }
 
-  setTheme(){
-    this.themeBool = !this.themeBool;
-    localStorage.setItem('themeBool', JSON.stringify(this.themeBool));
+  toggleTheme() {
     this.themeService.change();
   }
 }

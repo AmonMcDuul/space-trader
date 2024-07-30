@@ -3,9 +3,11 @@
         <div class="head-container">
             <h1>SPACE TRADER</h1>
             <div class="header-line"></div>
-            <button (click)="setTheme()" class="icon-button">
+            <div>
+              <button (click)="toggleTheme()" class="icon-button">
                 <fa-icon [icon]="faCircleHalfStroke" class="icon"></fa-icon>
             </button>
+            </div>
         </div>
         <div class="menu-container">
             <div class="menu-item" (click)="newGame()">StArt neW gAMe</div>
@@ -18,6 +20,12 @@
             <app-highscore></app-highscore>
         </div>
         <div class="options-container" *ngIf="showOptionsPanel">
+            <div>
+                <label for="themeSelector">SeLect TheMe:</label><br>
+                <select id="themeSelector" [(ngModel)]="selectedTheme" (change)="onThemeChange($event)">
+                  <option *ngFor="let theme of themeOptions" [value]="theme">{{ theme | titlecase }}</option>
+                </select>
+              </div>
             <h3>GAMe lenGth</h3>
             <div class="game-length-buttons">
                 <button class="game-length-button" *ngFor="let option of gameLengthOptions"

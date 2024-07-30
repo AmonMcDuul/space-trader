@@ -1,5 +1,4 @@
 .light-theme {
-  // --body-color: #1d1d1d;
   --body-color: #000000;
   --background-color: #ececec;
   --text-color: #1d1d1d;
@@ -19,13 +18,12 @@
 }
 
 .dark-theme {
-  // --body-color: #ececec;
   --body-color: #000000;
   --background-color: #1d1d1d;
   --text-color: #ececec;
   --second-text-color: #1d1d1d;
   --border-color: #ececec;
-  --headerline-color: #ececec;
+  --headerline-color: #ada8a8;
   --background-color-hover: #ececec;
   --text-color-hover: #1d1d1d;
   --border-color-hover: #1d1d1d;
@@ -38,3 +36,78 @@
   --scarcity: darkred;
 }
 
+.matrix-theme {
+  --body-color: #000000;
+  --background-color: #0d0208;
+  --text-color: #00ff41;
+  --second-text-color: #003b00;
+  --border-color: #00ff41;
+  --headerline-color: #00ff41;
+  --background-color-hover: #003b00;
+  --text-color-hover: #00ff41;
+  --border-color-hover: #00ff41;
+  --icon-color: #00ff41;
+  --table-header-color: #00ff41; 
+  --table-sub-border-color: #003b00;
+  --status-container-color: #0d0208;
+  --status-text-color: #00ff41;
+  --firesale: #00ff41;
+  --scarcity: #ff0000;
+}
+
+.desert-theme {
+  --body-color: #3e2723;
+  --background-color: #d7ccc8;
+  --text-color: #3e2723;
+  --second-text-color: #fff8e1;
+  --border-color: #3e2723;
+  --headerline-color: #3e2723;
+  --background-color-hover: #8d6e63;
+  --text-color-hover: #d7ccc8;
+  --border-color-hover: #d7ccc8;
+  --icon-color: #3e2723;
+  --table-header-color: #3e2723; 
+  --table-sub-border-color: #8d6e63;
+  --status-container-color: #3e2723;
+  --status-text-color: #d7ccc8;
+  --firesale: #ff5722;
+  --scarcity: #d32f2f;
+}
+
+.cyberpunk-theme {
+  --body-color: #0e0b16;
+  --background-color: #1b0034;
+  --text-color: #ff4fd8;
+  --second-text-color: #00ffdd;
+  --border-color: #ff4fd8;
+  --headerline-color: #ff4fd8;
+  --background-color-hover: #1b0034;
+  --text-color-hover: #00ffdd;
+  --border-color-hover: #00ffdd;
+  --icon-color: #ff4fd8;
+  --table-header-color: #ff4fd8; 
+  --table-sub-border-color: #00ffdd;
+  --status-container-color: #0e0b16;
+  --status-text-color: #00ffdd;
+  --firesale: #ff4fd8;
+  --scarcity: #00ffdd;
+}
+
+.space-theme {
+  --body-color: #000000;
+  --background-color: #1c1c1c;
+  --text-color: #ffffff;
+  --second-text-color: #1c1c1c;
+  --border-color: #00bfff;
+  --headerline-color: #00bfff;
+  --background-color-hover: #333333;
+  --text-color-hover: #ffffff;
+  --border-color-hover: #00bfff;
+  --icon-color: #00bfff;
+  --table-header-color: #00bfff;
+  --table-sub-border-color: #333333;
+  --status-container-color: #000000;
+  --status-text-color: #00bfff;
+  --firesale: #ff4500;
+  --scarcity: #ff1493;
+}

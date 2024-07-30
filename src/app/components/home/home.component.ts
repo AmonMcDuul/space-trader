@@ -21,21 +21,24 @@ export class HomeComponent {
   showHighScoresPanel = false;
   gameLength = 30;
   gameLengthOptions = [15, 30, 60, 90];
-  themeBool: boolean = false;
-  faCircleHalfStroke = faCircleHalfStroke;
+  selectedTheme: string = 'light';
+  themeOptions: string[] = [
+    'light', 
+    'dark', 
+    'matrix', 
+    'desert', 
+    'cyberpunk', 
+    'space', 
+  ];
+    faCircleHalfStroke = faCircleHalfStroke;
 
   constructor(private router: Router, protected themeService: ThemeService) {}
-  
-  ngOnInit(){
+
+  ngOnInit() {
     if (typeof window !== 'undefined') {
-      const storedThemeBool = localStorage.getItem('themeBool');
-      this.themeBool = storedThemeBool ? JSON.parse(storedThemeBool) : false;
-    }
-    if(this.themeBool){
-      this.themeService.set('light');
-    }
-    else{
-      this.themeService.set('dark');
+      const storedTheme = localStorage.getItem('selectedTheme');
+      this.selectedTheme = storedTheme ? storedTheme : 'light';
+      this.themeService.set(this.selectedTheme);
     }
   }
 
@@ -75,9 +78,20 @@ export class HomeComponent {
     this.showHighScoresPanel = true;
   }
 
-  setTheme(){
-    this.themeBool = !this.themeBool;
-    localStorage.setItem('themeBool', JSON.stringify(this.themeBool));
+  setTheme(theme: string) {
+    this.selectedTheme = theme;
+    this.themeService.set(theme);
+    localStorage.setItem('selectedTheme', theme);
+  }
+
+  toggleTheme() {
     this.themeService.change();
+  }
+
+  onThemeChange(event: Event) {
+    const target = event.target as HTMLSelectElement; // Type assertion
+    if (target) {
+      this.setTheme(target.value);
+    }
   }
 }
