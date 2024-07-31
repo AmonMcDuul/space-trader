@@ -49,7 +49,7 @@ export class HighscoreComponent {
   }
 
   filterHighScores(): void {
-    this.filteredHighScores = this.highScores.filter(highScore => highScore.gametype === this.selectedTab);
+    this.filteredHighScores = this.highScores.filter(highScore => highScore.gameTypeState === this.selectedTab);
   }
 
   getTabText(gametype: number): string {
