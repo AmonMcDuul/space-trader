@@ -19,12 +19,13 @@ export class HighscoreComponent {
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    // this.apiService.getHighScore().subscribe((data: HighScore[]) => {
-    //   this.highScores = data;
-    // }, error => {
-    //   console.error('Error fetching high scores', error);
-    // });
-    this.highScores = this.getDummyHighScores();
+    this.apiService.getHighScore().subscribe((data: HighScore[]) => {
+      this.highScores = data;
+      console.log(data);
+    }, error => {
+      console.error('Error fetching high scores', error);
+    });
+    // this.highScores = this.getDummyHighScores();
     this.filterHighScores();
   }
 
