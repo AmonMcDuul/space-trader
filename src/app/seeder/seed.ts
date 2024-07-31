@@ -6,7 +6,7 @@ import { Weapon } from "../models/weapon";
 
 export const seed = {
     daysPassed: 0,
-    balance: 100,
+    balance: 10000,
     fuel: 2,
     shield: new Shield("Basic shield", 20),
     weapon: new Weapon("Basic lasers", 30),

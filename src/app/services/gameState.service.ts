@@ -7,6 +7,7 @@ import { Shield } from '../models/shield';
 import { Weapon } from '../models/weapon';
 import { Router } from '@angular/router';
 import { SpecialDelivery } from '../models/specialDelivery';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,7 @@ export class GameStateService {
   ]
   specialPrint: string = "";
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiService: ApiService) { }
 
   CreateGameState(gameLength: number = 30,
     daysPassed: number = 0,
@@ -79,6 +80,7 @@ export class GameStateService {
 
   endGame() {
     if (this.daysPassed() >= this.gameLength) {
+      //open modal
       alert("game ended, you scored: " + this.balance())
       this.router.navigate(['/']);
     }

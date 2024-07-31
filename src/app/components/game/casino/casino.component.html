@@ -1,0 +1,31 @@
+<div class="casino-container">
+    <h2 class="MajorMonoDisplay">CASINO</h2>
+    <hr>
+    <div class="game-selection">
+      <label for="betAmount">Enter your bet amount: </label>
+      <input type="number" id="betAmount" [(ngModel)]="betAmount" placeholder="Bet Amount">
+    </div>
+    <div class="games">
+      <div class="game" *ngFor="let game of games">
+        <h3>{{ game.name }}</h3>
+        <button class="general-button" (click)="playGame(game)">Play {{ game.name }}</button>
+        <div *ngIf="game.name === 'High or Low'">
+          <label>
+            <input type="radio" name="highOrLow" (click)="setHighOrLowChoice('high')"> High
+          </label>
+          <label>
+            <input type="radio" name="highOrLow" (click)="setHighOrLowChoice('low')"> Low
+          </label>
+        </div>
+        <div *ngIf="game.name === 'Guess the Number'">
+          <label for="chosenNumber">Choose a number between 1 and 10: </label>
+          <input type="number" id="chosenNumber" [(ngModel)]="chosenNumber" min="1" max="10" placeholder="Number">
+        </div>
+      </div>
+    </div>
+    <div class="results">
+      <h3>Game Results</h3>
+      <p>{{ result }}</p>
+    </div>
+  </div>
+  

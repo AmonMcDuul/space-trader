@@ -15,6 +15,7 @@
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-color);
+    border-radius: 5px;
 }
 
 .head-container{
@@ -69,11 +70,12 @@
 }
 
 .location-container{
-    height: 46%;
+    height: auto;
     padding: 10px;
     border: 1px solid var(--border-color);
     margin-bottom: 10px;
     font-weight: 700;
+    border-radius: 5px;
 }
 
 .stats{
@@ -91,9 +93,10 @@
 }
 
 .travel-container{
-    height: 46%;
+    height: auto;
     border: 1px solid var(--border-color);
     padding: 10px;
+    border-radius: 5px;
 }
 
 .right-container{
@@ -107,44 +110,36 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 32%;
+    min-height: 350px;
     margin-bottom: 10px;
 }
 
 .action-container{
-    height: 95.5%; //lollll
-    width: 25%;
-    border: 1px solid var(--border-color);
+    min-height: 350px;
+    max-height: 350px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 10px;
     margin-right: 10px;
+    width: 25%;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
     overflow-y: auto;
 }
 
 .status-container{
+    min-height: 350px;
     max-height: 350px;
     width: 71%;
     border: 1px solid var(--border-color);
+    border-radius: 5px;
     padding-left: 20px;
     background-color: var(--status-container-color);
     color: var(--status-text-color);
     overflow-y: auto;
 }
 
-.market-container {
-    display: flex;
-    flex-direction: row;
-    height: 68%;
-  }
-  
-  .inventory,
-  .market {
-    height: 95%;
-    width: 50%;
-    border: 1px solid var(--border-color);
-    padding: 10px;
-    // overflow-y: auto;
+.user-action-container {
+    height: 100%;
   }
   
 table {
@@ -160,55 +155,6 @@ thead {
 tr {
     display: table;
     width: 100%;
-}
-
-.delivery-tbody {
-    display: block;
-    height: 40px;
-    width: 100%;
-    overflow-y: auto;
-    overflow-x: auto;
-}
-
-.delivery-tr{
-    th,
-    td {
-        padding: 4px;
-        text-align: left;
-        border-bottom: 1px solid var(--table-sub-border-color);
-    }
-
-    th:nth-child(1), td:nth-child(1) {
-        width: 20%;
-    }
-
-    th:nth-child(2), td:nth-child(2) {
-        width: 50%;
-    }
-
-    th:nth-child(3), td:nth-child(3) {
-        width: 20%;
-    }
-
-    th:nth-child(4), td:nth-child(4) {
-        width: 10%;
-    }
-}
-
-.inventory-tbody {
-    display: block;
-    height: 200px;
-    width: 100%;
-    overflow-y: auto;
-    overflow-x: auto;
-}
-
-.market-tbody {
-    display: block;
-    height: 340px;
-    width: 100%;
-    overflow-y: auto;
-    overflow-x: auto;
 }
 
 th,
@@ -272,18 +218,6 @@ tr:hover {
   color: var(--text-color-hover);
     margin-left: 5px;
   }
-
-.firesale {
-    color: green;
-    font-weight: 700;
-    // font-family: 'MajorMonoDisplay', monospace;
-}
-
-.scarcity {
-    color: darkred;
-    font-weight: 700;
-    // font-family: 'MajorMonoDisplay', monospace;
-}
 
 .MajorMonoDisplay {
     font-family: 'MajorMonoDisplay', monospace;
@@ -395,29 +329,27 @@ tr:hover {
       padding: 10px 0;
     }
   
-    .top-right-container,
-    .market-container {
+    .top-right-container {
       flex-direction: column;
     }
   
-    .action-container,
-    .status-container,
-    .inventory,
-    .market {
+    .action-container{
+      max-height: 200px;
+      min-height: 200px;
+      width: 100%;
+      padding: 10px 0;
+    }
+    .action-button{
+      width:97%;
+      margin-left: 1.5%;
+    }
+    
+    .status-container{
+      max-height: 300px;
+      min-height: 300px;
       width: 100%;
       margin-bottom: 10px;
       padding: 10px 0;
-    }
-  
-    .status-container {
-      height: auto;
-      max-height: 300px;
-      min-height: 300px;
-    }
-  
-    .inventory,
-    .market {
-      height: auto;
     }
   }
   

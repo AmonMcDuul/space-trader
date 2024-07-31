@@ -1,0 +1,18 @@
+<div class="loan-shark-container">
+    <h2 class="MajorMonoDisplay">LOAN SHARK</h2>
+    <hr>
+    <div class="loan-sharks">
+      <div class="loan-shark" *ngFor="let loanShark of loanSharks">
+        <h3>{{ loanShark.name }}</h3>
+        <p>Loan Amount: ${{ loanShark.loanAmount }}</p>
+        <p>Interest Rate: {{ loanShark.interestRate * 100 }}%</p>
+        <button class="general-button" (click)="chooseLoanShark(loanShark)">Choose {{ loanShark.name }}</button>
+      </div>
+    </div>
+    <div class="results">
+      <h3>Loan Shark Results</h3>
+      <p>{{ result }}</p>
+      <button class="general-button" (click)="passDay()" *ngIf="chosenLoanShark">Pass Day</button>
+    </div>
+  </div>
+  

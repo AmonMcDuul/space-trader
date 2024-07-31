@@ -7,13 +7,16 @@ import { Location } from '../../models/location'
 import { ThemeService } from '../../services/theme.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
+import { MarketComponent } from './market/market.component';
+import { CasinoComponent } from "./casino/casino.component";
+import { LoanSharkComponent } from './loan-shark/loan-shark.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, MarketComponent, CasinoComponent, LoanSharkComponent],
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss'] // Corrected the attribute name to styleUrls
+  styleUrls: ['./game.component.scss'] 
 })
 export class GameComponent implements AfterViewInit {
   gameLength: number = 30;
@@ -22,6 +25,10 @@ export class GameComponent implements AfterViewInit {
   selectedTheme: string = 'light';
   themeBool: boolean = !localStorage.getItem('themeBool');
   faCircleHalfStroke = faCircleHalfStroke;
+
+  marketBool: boolean = true;
+  casinoBool: boolean = false;
+  loanBool: boolean = false;
 
   @ViewChild('statusContainer') statusContainer!: ElementRef;  
   
@@ -109,6 +116,24 @@ export class GameComponent implements AfterViewInit {
     alert('Not yet implemented')
   }
 
+  openMarket() {
+    this.casinoBool = false;
+    this.loanBool = false;
+    this.marketBool = true;
+  }
+
+  openCasino() {
+    this.loanBool = false;
+    this.marketBool = false;
+    this.casinoBool = true;
+  }
+
+  openLoanShark() {
+    this.marketBool = false;
+    this.casinoBool = false;
+    this.loanBool = true;
+  }
+
   waitADay() {
     this.gameState.travel(this.gameState.currentLocation());
     this.typeWriter(this.gameState.statusText());
@@ -116,5 +141,9 @@ export class GameComponent implements AfterViewInit {
 
   toggleTheme() {
     this.themeService.change();
+  }
+
+  handleTypeWriter(text: string) {
+    this.typeWriter(text);
   }
 }

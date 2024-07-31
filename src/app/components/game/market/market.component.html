@@ -1,0 +1,79 @@
+<div class="market-container">
+<div class="inventory">
+    <div class="delivery">
+        <h2 class="MajorMonoDisplay">SPECIAL PARCEL SERVICE</h2>
+        <hr>
+        <table>
+            <thead>
+                <tr class="delivery-tr">
+                    <th>NAME</th>
+                    <th>DESTINATION</th>
+                    <th>$</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="delivery-tbody">
+                <tr class="delivery-tr">
+                    <td>{{ gameState.specialDelivery().name }}</td>
+                    <td>{{ gameState.specialDelivery().destination }}</td>
+                    <td>${{ gameState.specialDelivery().price }}</td>
+                    <td>
+                        @if ( gameState.specialDelivery().destination ==
+                        gameState.currentLocation().name) {
+                        <button class="general-button"
+                            (click)="deliverSpecialDelivery()">Deliver</button>}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <h2 class="MajorMonoDisplay">INVENTORY</h2>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>QTY</th>
+                <th>$</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="inventory-tbody">
+            <tr *ngFor="let item of gameState.inventory()">
+                @if (item.quantity > 0) {
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.price }}</td>
+                <td><button class="general-button" (click)="sell(item)">Sell</button></td>
+                }
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="market">
+    <h2 class="MajorMonoDisplay">MARKET</h2>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>QTY</th>
+                <th>$</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="market-tbody">
+            <tr *ngFor="let item of gameState.marketItems()"
+                [ngClass]="{'firesale': item.name === gameState.specialFireSale(), 'scarcity': item.name === gameState.specialScarcity()}">
+                @if (item.quantity > 0) {
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.price }}</td>
+                <td><button class="general-button" (click)="buy(item)">Buy</button></td>
+                }
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
