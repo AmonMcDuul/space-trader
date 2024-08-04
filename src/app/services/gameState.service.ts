@@ -80,7 +80,11 @@ export class GameStateService {
       this.createRandomSpecialDelivery(this.specialDelivery());
       this.statusText.set(statusText + this.specialPrint);
       this.specialPrint = "";
+      this.loan.set(0)
+      this.interestRate.set(0);
+      this.chosenLoanShark.set(new LoanShark("",0,0,false))
     }
+
 
   endGame() {
     if (this.daysPassed() >= this.gameLength) {
