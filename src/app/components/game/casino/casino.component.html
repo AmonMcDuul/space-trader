@@ -1,15 +1,25 @@
 <div class="casino-container">
     <h2 class="MajorMonoDisplay">CASINO</h2>
     <hr>
+    <button (click)="openHighLow()" class="general-button">High-low</button>
+    <button (click)="openCoinFlip()" class="general-button">Coin flip</button>
+    <button (click)="openGuessNumber()" class="general-button">Guess the number</button>
     <div class="game-selection">
       <label for="betAmount">Enter your bet amount: </label>
-      <input type="number" id="betAmount" [(ngModel)]="betAmount" placeholder="Bet Amount">
+      <div>
+        <div class="bet-amounts">
+          <button *ngFor="let amount of betAmounts" (click)="setBetAmount(amount)" class="general-button" [ngClass]="{'selected': betAmount === amount}">
+            {{ amount }}
+          </button>
+        </div>
+      </div>
     </div>
     <div class="games">
-      <div class="game" *ngFor="let game of games">
-        <h3>{{ game.name }}</h3>
-        <button class="general-button" (click)="playGame(game)">Play {{ game.name }}</button>
-        <div *ngIf="game.name === 'High or Low'">
+      @if(highLowBool){
+        <h3>High-low</h3>
+        <p>blablabla blabla blabla uitleg</p>
+        <button class="general-button" (click)="playGame(games[0])">Play {{ games[0].name }}</button>
+        <div>
           <label>
             <input type="radio" name="highOrLow" (click)="setHighOrLowChoice('high')"> High
           </label>
@@ -17,11 +27,25 @@
             <input type="radio" name="highOrLow" (click)="setHighOrLowChoice('low')"> Low
           </label>
         </div>
-        <div *ngIf="game.name === 'Guess the Number'">
-          <label for="chosenNumber">Choose a number between 1 and 10: </label>
-          <input type="number" id="chosenNumber" [(ngModel)]="chosenNumber" min="1" max="10" placeholder="Number">
+      }
+      @if(coinFlipBool){
+        <h3>Coin flip</h3>
+        <p>blablabla blabla blabla uitleg</p>
+        <button class="general-button" (click)="playGame(games[1])">Play {{ games[1].name }}</button>
+      }
+      @if(guessNumberBool){
+        <h3>Guess the number</h3>
+        <p>blablabla blabla blabla uitleg</p>
+        <button class="general-button" (click)="playGame(games[2])">Play {{ games[2].name }}</button>
+        <div>
+          <label for="chosenNumber">Choose a number between 0 and 9: </label>
+          <div>
+            <button *ngFor="let number of numbers" (click)="setChosenNumber(number)" class="general-button" [ngClass]="{'selected': chosenNumber === number}">
+              {{ number }}
+            </button>
+          </div>
         </div>
-      </div>
+      }
     </div>
     <div class="results">
       <h3>Game Results</h3>

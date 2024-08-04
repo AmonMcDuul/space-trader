@@ -2,17 +2,23 @@
     <h2 class="MajorMonoDisplay">LOAN SHARK</h2>
     <hr>
     <div class="loan-sharks">
-      <div class="loan-shark" *ngFor="let loanShark of loanSharks">
-        <h3>{{ loanShark.name }}</h3>
-        <p>Loan Amount: ${{ loanShark.loanAmount }}</p>
-        <p>Interest Rate: {{ loanShark.interestRate * 100 }}%</p>
-        <button class="general-button" (click)="chooseLoanShark(loanShark)">Choose {{ loanShark.name }}</button>
-      </div>
+      @if(gameState.chosenLoanShark().chosen == false){
+        <div class="loan-shark" *ngFor="let loanShark of loanSharks">
+          <h3>{{ loanShark.name }}</h3>
+          <p>Loan Amount: ${{ loanShark.loanAmount }}</p>
+          <p>Interest Rate: {{ loanShark.interestRate * 100 }}%</p>
+          <button class="general-button" (click)="chooseLoanShark(loanShark)">Choose {{ loanShark.name }}</button>
+        </div>
+      }
+      @else {
+        <h3>{{ gameState.chosenLoanShark().name }}</h3>
+        <p>Loan Amount: ${{ gameState.chosenLoanShark().loanAmount }}</p>
+        <p>Interest Rate: {{ gameState.chosenLoanShark().interestRate * 100 }}%</p>
+        <button class="general-button" (click)="payOffLoan()">Pay off loan {{ gameState.chosenLoanShark().name }}</button>
+      }
     </div>
     <div class="results">
-      <h3>Loan Shark Results</h3>
       <p>{{ result }}</p>
-      <button class="general-button" (click)="passDay()" *ngIf="chosenLoanShark">Pass Day</button>
     </div>
   </div>
   

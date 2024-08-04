@@ -8,6 +8,7 @@ import { Weapon } from '../models/weapon';
 import { Router } from '@angular/router';
 import { SpecialDelivery } from '../models/specialDelivery';
 import { ApiService } from './api.service';
+import { LoanShark } from '../models/loanShark';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,9 @@ export class GameStateService {
   gameLength: number = 30;
   daysPassed = signal(0);
   balance = signal(0);
+  loan = signal(0);
+  interestRate = signal(0);
+  chosenLoanShark = signal(new LoanShark("",0,0,false))
   fuel = signal(0);
   shield = signal(new Shield("", 0));
   weapon = signal(new Weapon("", 0));
@@ -91,6 +95,7 @@ export class GameStateService {
     if(this.daysPassed() > this.gameLength){
         this.endGame();
     }
+    this.updateLoanShark();
     this.randomizePricesAndQuantities();
     this.randomizeMarketItems();
     this.checkSpecialDelivery(this.specialDelivery());
@@ -322,5 +327,11 @@ export class GameStateService {
     this.balance.update(balance => balance + this.specialDelivery().price);
     this.specialDelivery.update(s => new SpecialDelivery("Pending..", "Pending..", 0));
     this.specialDelivery().countDown();
+  }
+
+  updateLoanShark(){
+    if(this.loan() >= 0){
+      this.loan.update(v => v + (v * this.interestRate()))
+    }
   }
 }

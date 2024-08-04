@@ -11,7 +11,7 @@
   .game {
     margin-bottom: 15px;
   }
-  
+
   .general-button {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -31,7 +31,12 @@
     border: 2px solid var(--border-color-hover);
   }
   
+  .selected {
+    background-color: var(--background-color-hover);
+    color: var(--text-color-hover);
+    border: 2px solid var(--border-color-hover);
+  }
+
   .MajorMonoDisplay {
     font-family: 'MajorMonoDisplay', monospace;
   }
-  

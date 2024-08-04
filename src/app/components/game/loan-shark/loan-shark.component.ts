@@ -6,6 +6,7 @@ interface LoanShark {
   name: string;
   loanAmount: number;
   interestRate: number; 
+  chosen: boolean;
 }
 
 @Component({
@@ -19,28 +20,39 @@ export class LoanSharkComponent {
   @Output() statusTextChange = new EventEmitter<string>();
 
   loanSharks: LoanShark[] = [
-    { name: 'Sharky Joe', loanAmount: 500, interestRate: 0.1 },
-    { name: 'Mean Mike', loanAmount: 2000, interestRate: 0.08 },
-    { name: 'Big Tony', loanAmount: 5000, interestRate: 0.06 },
-    { name: 'Boss Don', loanAmount: 10000, interestRate: 0.04 }
+    { name: 'Sharky Joe', loanAmount: 500, interestRate: 0.05, chosen: false },
+    { name: 'Mean Mike', loanAmount: 2000, interestRate: 0.04, chosen: false },
+    { name: 'Big Tony', loanAmount: 5000, interestRate: 0.03, chosen: false },
+    { name: 'Boss Don', loanAmount: 10000, interestRate: 0.02, chosen: false }
   ];
-  chosenLoanShark: LoanShark | null = null;
   result: string = '';
   daysPassed: number = 0;
-
-  constructor(public gameState: GameStateService) { }
-
   
+  constructor(public gameState: GameStateService) { 
+   }
+
   chooseLoanShark(loanShark: LoanShark) {
-    this.chosenLoanShark = loanShark;
+    this.gameState.chosenLoanShark.update(v => v = { name: loanShark.name, loanAmount: loanShark.loanAmount, interestRate: loanShark.interestRate, chosen: true });
     this.result = `You chose ${loanShark.name} and received a loan of $${loanShark.loanAmount} with an interest rate of ${loanShark.interestRate * 100}%.`;
+    loanShark.chosen = true;
+    this.gameState.setStatusText(this.result + '\n');
+    this.statusTextChange.emit(this.gameState.statusText());
+    this.gameState.balance.update(v => v + loanShark.loanAmount);
+    this.gameState.loan.update(v => v + loanShark.loanAmount);
+    this.gameState.interestRate.update(v => loanShark.interestRate);
   }
 
-  passDay() {
-    this.daysPassed++;
-    if (this.chosenLoanShark) {
-      const interestAccrued = this.chosenLoanShark.loanAmount * this.chosenLoanShark.interestRate * this.daysPassed;
-      this.result = `You chose ${this.chosenLoanShark.name}. Days passed: ${this.daysPassed}. Interest accrued: $${interestAccrued.toFixed(2)}. Total debt: $${(this.chosenLoanShark.loanAmount + interestAccrued).toFixed(2)}.`;
+  payOffLoan(){
+    if(this.gameState.loan() <= this.gameState.balance()){
+      this.gameState.balance.update(v => v - this.gameState.loan())
+      this.gameState.loan.update(v => 0);
+      this.gameState.setStatusText("You payed off your loan of" + this.gameState.loan() + "! \n");
+      this.statusTextChange.emit(this.gameState.statusText());
+      this.gameState.chosenLoanShark.update(v => v = { name: "", loanAmount: 0, interestRate: 0, chosen: false });
+    }
+    else {
+      this.gameState.setStatusText("You can't pay off your loan yet! \n");
+      this.statusTextChange.emit(this.gameState.statusText());
     }
   }
 }
