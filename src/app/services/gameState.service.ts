@@ -354,4 +354,25 @@ export class GameStateService {
       this.loan.update(v => v + (v * this.interestRate()))
     }
   }
+
+  clearGameState() {
+    this.daysPassed.set(0);
+    this.balance.set(0);
+    this.loan.set(0);
+    this.interestRate.set(0);
+    this.chosenLoanShark.set(new LoanShark("", 0, 0, false));
+    this.fuel.set(30);
+    this.shield.set(new Shield("", 0));
+    this.weapon.set(new Weapon("", 0));
+    this.currentLocation.set(new Location("", 0));
+    this.inventory.set([]);
+    this.locations.set([]);
+    this.allMarketItems.set([]);
+    this.marketItems.set([]);
+    this.specialFireSale.set("");
+    this.specialScarcity.set("");
+    this.specialDelivery.set(new SpecialDelivery("","",3));
+    this.statusText.set("");
+    this.specialPrint = "";
+  }
 }

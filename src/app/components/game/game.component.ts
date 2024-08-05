@@ -10,6 +10,7 @@ import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import { MarketComponent } from './market/market.component';
 import { CasinoComponent } from "./casino/casino.component";
 import { LoanSharkComponent } from './loan-shark/loan-shark.component';
+import { InventoryItem } from '../../models/inventoryItem';
 
 @Component({
   selector: 'app-game',
@@ -88,17 +89,21 @@ export class GameComponent implements AfterViewInit {
   }
 
   restartGame() {
-    this.gameState.CreateGameState(this.gameLength, seed.daysPassed, seed.balance, seed.fuel, seed.shield, seed.weapon, seed.locations, seed.marketItems, seed.inventory, seed.locations[2], seed.statusText);
+    this.gameState.clearGameState();
+    this.gameState.CreateGameState(this.gameLength, seed.daysPassed, seed.balance, seed.fuel, seed.shield, seed.weapon, seed.locations, seed.marketItems, [
+      new InventoryItem('Raktajino', 5, 5),
+      new InventoryItem('Space biscuits', 8, 3),
+      new InventoryItem('Communications', 60, 1),
+  ], seed.locations[2], seed.statusText);
     this.tempText = ""; 
+    console.log(seed.inventory);
+    console.log(this.gameState.inventory());
     this.typeWriter(this.gameState.statusText());
   }
 
   quitGame() {
+    this.gameState.clearGameState()
     this.router.navigate(['/']);
-  }
-
-  notYet() {
-    alert('Not yet implemented')
   }
 
   openMarket() {
