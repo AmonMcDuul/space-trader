@@ -142,14 +142,14 @@ export class GameStateService {
         }
   }
 
-  buy(item: { name: string; price: number }) {
-    if (this.balance() >= item.price) {
+  buy(item: { name: string; price: number }, quantity: number ) {
+    if (this.balance() >= item.price * quantity) {
         const marketItem = this.marketItems().find(i => i.name === item.name);
         if(marketItem && marketItem.quantity >= 1){
             const inventoryItem = this.inventory().find(i => i.name === item.name);
-            marketItem.quantity--;
+            marketItem.quantity = marketItem.quantity - quantity;
             if (inventoryItem) {
-                inventoryItem.quantity++;
+                inventoryItem.quantity = marketItem.quantity + quantity;
             } else {
               if(item.name === "Fuel"){
                 if(this.fuel() >= 10){
@@ -165,25 +165,29 @@ export class GameStateService {
               }
             }
             this.balance.update(balance => balance - item.price);
-            this.setStatusText(`You have bought ${item.name}.\n`);
+            this.setStatusText(`You have bought ${quantity} of ${item.name}.\n`);
             } 
     } else {
-      this.setStatusText(`You don't have enough money to buy ${item.name}.\n`);
+      if(quantity == 1){
+        this.setStatusText(`You don't have enough money to buy ${item.name}.\n`);
+      } else {
+        this.setStatusText(`You don't have enough money to buy ${quantity} of ${item.name}.\n`);
+      }
     }
   }
 
-  sell(item: { name: string; price: number }) {
+  sell(item: { name: string; price: number }, quantity: number) {
     const inventoryItem = this.inventory().find(i => i.name === item.name);
     if(inventoryItem && inventoryItem.quantity >= 1){
       const marketItem = this.marketItems().find(i => i.name === item.name);
-      inventoryItem.quantity--;
+      inventoryItem.quantity = inventoryItem.quantity - quantity;
       if (marketItem) {
-          marketItem.quantity++;
+          marketItem.quantity = inventoryItem.quantity + quantity;
       } else {
         this.marketItems.update(marketItems => [...marketItems, { name: item.name, price: item.price, quantity: 1 }]);
       }
-      this.balance.update(balance => balance + item.price);
-      this.setStatusText(`You have sold ${item.name}.\n`);
+      this.balance.update(balance => balance + (item.price * quantity));
+      this.setStatusText(`You have sold ${quantity} of ${item.name}.\n`);
     }
   }
 

@@ -87,21 +87,6 @@ export class GameComponent implements AfterViewInit {
     this.typeWriter(this.gameState.statusText());
   }
 
-  buy(item: { name: string; price: number }) {
-    this.gameState.buy(item);
-    this.typeWriter(this.gameState.statusText());
-  }
-
-  sell(item: { name: string; price: number }) {
-    this.gameState.sell(item);
-    this.typeWriter(this.gameState.statusText());
-  }
-
-  deliverSpecialDelivery() {
-    this.gameState.sellSpecialParcel();
-    this.typeWriter(this.gameState.statusText());
-  }
-
   restartGame() {
     this.gameState.CreateGameState(this.gameLength, seed.daysPassed, seed.balance, seed.fuel, seed.shield, seed.weapon, seed.locations, seed.marketItems, seed.inventory, seed.locations[2], seed.statusText);
     this.tempText = ""; 
