@@ -32,6 +32,8 @@ export class CasinoComponent {
   highLowBool: boolean = false;
   coinFlipBool: boolean = false;
   guessNumberBool: boolean = false;
+  highBool: boolean = false;
+  lowBool: boolean = false;
 
   constructor(public gameState: GameStateService) { }
 
@@ -103,6 +105,14 @@ export class CasinoComponent {
   }
 
   setHighOrLowChoice(choice: 'high' | 'low'): void {
+    if(choice == 'high'){
+      this.highBool = true;
+      this.lowBool = false;
+    }
+    if(choice == 'low'){
+      this.lowBool = true;
+      this.highBool = false;
+    }
     this.highOrLowChoice = choice;
   }
 

@@ -11,14 +11,14 @@
         </div>
       }
       @else {
-        <h3>{{ gameState.chosenLoanShark().name }}</h3>
-        <p>Loan Amount: ${{ gameState.chosenLoanShark().loanAmount }}</p>
-        <p>Interest Rate: {{ gameState.chosenLoanShark().interestRate * 100 }}%</p>
-        <button class="general-button" (click)="payOffLoan()">Pay off loan {{ gameState.chosenLoanShark().name }}</button>
+        <div>
+          <h3>{{ gameState.chosenLoanShark().name }}</h3>
+          <p>Loaned: ${{ gameState.chosenLoanShark().loanAmount }}</p>
+          <p>Interest Rate: {{ gameState.chosenLoanShark().interestRate * 100 }}%</p>
+          <p>Amount to pay off: ${{ gameState.loan().toFixed(0) }}</p>
+          <button class="general-button" (click)="payOffLoan()">Pay off loan {{ gameState.chosenLoanShark().name }}</button>
+        </div>
       }
-    </div>
-    <div class="results">
-      <p>{{ result }}</p>
     </div>
   </div>
   

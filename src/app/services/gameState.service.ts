@@ -146,27 +146,35 @@ export class GameStateService {
     if (this.balance() >= item.price * quantity) {
         const marketItem = this.marketItems().find(i => i.name === item.name);
         if(marketItem && marketItem.quantity >= 1){
-            const inventoryItem = this.inventory().find(i => i.name === item.name);
-            marketItem.quantity = marketItem.quantity - quantity;
-            if (inventoryItem) {
-                inventoryItem.quantity = marketItem.quantity + quantity;
-            } else {
-              if(item.name === "Fuel"){
+          if(marketItem.quantity < quantity){
+            this.setStatusText(`You can't buy ${quantity} of ${item.name}. The seller only has ${marketItem.quantity} of ${item.name}.\n`);
+            return;
+          }
+          const inventoryItem = this.inventory().find(i => i.name === item.name);
+          marketItem.quantity = marketItem.quantity - quantity;
+          if (inventoryItem) {
+              inventoryItem.quantity = inventoryItem.quantity + quantity;
+          } else {
+            if(item.name === "Fuel"){
+              for(let i = 1; i <= quantity; i++){
                 if(this.fuel() >= 10){
-                  this.setStatusText("You can't store any more fuel, it's just spilling away\n")
+                  this.setStatusText(`You have bought ${i} amount of fuel.\n` + "You can't store any more fuel, it's just spilling away\n")
+                  marketItem.quantity = marketItem.quantity + (quantity - i);
+                  return;
                 } else{
                   this.fuel.update(fuel => fuel + 1)
-                  marketItem.quantity = marketItem.quantity;
+                  this.balance.update(balance => balance - (item.price));
                 }
-              } else{
-                this.inventory.update(inventory => [...inventory, { name: item.name, price: item.price, quantity: 1 }]);
-                this.inventory().sort((a, b) => {
-                  return a.name.localeCompare(b.name);});
               }
+            } else{
+              this.inventory.update(inventory => [...inventory, { name: item.name, price: item.price, quantity: quantity }]);
+              this.inventory().sort((a, b) => {
+                return a.name.localeCompare(b.name);});
             }
-            this.balance.update(balance => balance - item.price);
-            this.setStatusText(`You have bought ${quantity} of ${item.name}.\n`);
-            } 
+          }
+          this.balance.update(balance => balance - (item.price * quantity));
+          this.setStatusText(`You have bought ${quantity} of ${item.name}.\n`);
+        } 
     } else {
       if(quantity == 1){
         this.setStatusText(`You don't have enough money to buy ${item.name}.\n`);
@@ -179,6 +187,10 @@ export class GameStateService {
   sell(item: { name: string; price: number }, quantity: number) {
     const inventoryItem = this.inventory().find(i => i.name === item.name);
     if(inventoryItem && inventoryItem.quantity >= 1){
+      if(inventoryItem.quantity < quantity){
+        this.setStatusText(`You can't sell ${quantity} of ${item.name}. You only have ${inventoryItem.quantity} of ${item.name}.\n`);
+        return;
+      }
       const marketItem = this.marketItems().find(i => i.name === item.name);
       inventoryItem.quantity = inventoryItem.quantity - quantity;
       if (marketItem) {
