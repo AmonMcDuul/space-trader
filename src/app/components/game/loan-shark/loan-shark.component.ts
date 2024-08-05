@@ -20,10 +20,10 @@ export class LoanSharkComponent {
   @Output() statusTextChange = new EventEmitter<string>();
 
   loanSharks: LoanShark[] = [
-    { name: 'Sharky Joe', loanAmount: 500, interestRate: 0.05, chosen: false },
-    { name: 'Mean Mike', loanAmount: 2000, interestRate: 0.04, chosen: false },
-    { name: 'Big Tony', loanAmount: 5000, interestRate: 0.03, chosen: false },
-    { name: 'Boss Don', loanAmount: 10000, interestRate: 0.02, chosen: false }
+    { name: 'Galactic Gary', loanAmount: 500, interestRate: 0.05, chosen: false },
+    { name: 'Asteroid Al', loanAmount: 2000, interestRate: 0.04, chosen: false },
+    { name: 'Cosmic Carl', loanAmount: 5000, interestRate: 0.03, chosen: false },
+    { name: 'Black Hole Bill', loanAmount: 10000, interestRate: 0.02, chosen: false }
   ];
   result: string = '';
   daysPassed: number = 0;

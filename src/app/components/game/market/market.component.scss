@@ -193,7 +193,12 @@ tr:hover {
     width:20%;
     height: 10%;
     padding-top: 20px;
+    margin-right: 10px;
+    justify-content: space-around;
+}
 
+.extra-space {
+    min-width: 16px;
 }
 
   /* For mobile devices */

@@ -33,9 +33,9 @@
                 <h2 class="MajorMonoDisplay">INVENTORY</h2>
             </div>
             <div class="quantity-options">
-                <button (click)="setSellQuantity(false)" class="general-button">-</button>
-                <input type="number" (change)="maxSellSelected = false" [(ngModel)]="sellQuantity" min="1" class="general-input">
-                <button (click)="setSellQuantity(true)" class="general-button">+</button>
+                <button (click)="setSellQuantity(false)" class="general-button extra-space">-</button>
+                <input type="number" (change)="maxSellSelected = false" [(ngModel)]="sellQuantity" min="1" class="general-input extra-space">
+                <button (click)="setSellQuantity(true)" class="general-button extra-space">+</button>
                 <button (click)="setMaxSell()" class="general-button" [ngClass]="{'selected': maxSellSelected}">Max</button>
             </div>
         </div>
@@ -64,12 +64,12 @@
     <div class="market">
         <div class="header-quantity-container">
             <div class="header-space">
-                <h2 class="MajorMonoDisplay">MARKET</h2>
+                <h2 class="MajorMonoDisplay">ORBITAL TRADING POST</h2>
             </div>
             <div class="quantity-options">
-                <button (click)="setBuyQuantity(false)" class="general-button">-</button>
-                <input type="number" (change)="maxBuySelected = false" [(ngModel)]="buyQuantity" min="1" class="general-input">
-                <button (click)="setBuyQuantity(true)" class="general-button">+</button>
+                <button (click)="setBuyQuantity(false)" class="general-button extra-space">-</button>
+                <input type="number" (change)="maxBuySelected = false" [(ngModel)]="buyQuantity" min="1" class="general-input extra-space">
+                <button (click)="setBuyQuantity(true)" class="general-button extra-space">+</button>
                 <button (click)="setMaxBuy()" class="general-button" [ngClass]="{'selected': maxBuySelected}">Max</button>
             </div>
         </div>

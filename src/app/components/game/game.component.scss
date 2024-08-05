@@ -329,8 +329,10 @@ tr:hover {
   
     .top-right-container {
       flex-direction: column;
+      max-height: 600px;
+      min-height: 600px;
     }
-  
+
     .action-container{
       max-height: 200px;
       min-height: 200px;
