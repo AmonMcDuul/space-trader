@@ -53,7 +53,7 @@ export class CasinoComponent {
         (this.highOrLowChoice === 'high' && nextNumber > this.initialNumber) ||
         (this.highOrLowChoice === 'low' && nextNumber < this.initialNumber)
       ) {
-        this.result = resultText + `Congratulations! You won $${bet * 1.5} in High or Low!`;
+        this.result = resultText + `Congratulations! You won $${bet * 1.5 - bet} in High or Low!`;
         this.gameState.balance.update(v => v - (bet) + (bet * 1.5))
       } else {
         this.result = resultText + `Sorry, you lost $${bet} in High or Low.`;
@@ -70,7 +70,7 @@ export class CasinoComponent {
   playDoubleOrNothing(bet: number): void {
     const outcome = Math.random() < 0.5;
     if (outcome) {
-      this.result = 'Coin Flip: Heads - Congratulations! You doubled your bet and won $' + (bet * 2) + '!';
+      this.result = 'Coin Flip: Heads - Congratulations! You doubled your bet and won $' + (bet) + '!';
       this.gameState.balance.update(v => v - (bet) + (bet * 2))
     } else {
       this.result = 'Coin Flip: Tails - Sorry, you lost $' + bet + ' in Double or Nothing.';
@@ -85,7 +85,7 @@ export class CasinoComponent {
     const randomNumber = Math.floor(Math.random() * 10);
     if (chosenNumber !== null) {
       if (chosenNumber === randomNumber) {
-        this.result = `You guessed: ${chosenNumber}, Correct number: ${randomNumber} - Amazing! You won $${bet * 10}!`;
+        this.result = `You guessed: ${chosenNumber}, Correct number: ${randomNumber} - Amazing! You won $${bet * 10 - bet}!`;
         this.gameState.balance.update(v => v - (bet) + (bet * 10))
       } else {
         this.result = `You guessed: ${chosenNumber}, Correct number: ${randomNumber} - Unlucky! You lost $${bet}.`;

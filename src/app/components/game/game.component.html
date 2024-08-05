@@ -50,9 +50,9 @@
                     <div class="action-container">
                         <h2 class="MajorMonoDisplay">NAVIGATE</h2>
                         <hr>
-                        <button (click)="openMarket()" class="action-button">MARKET</button>
-                        <button (click)="openLoanShark()" class="action-button">LOAN SHARK</button>
-                        <button (click)="openCasino()" class="action-button">CASINO</button>
+                        <button (click)="openMarket()" class="action-button" [ngClass]="{'selected': marketBool}">MARKET</button>
+                        <button (click)="openLoanShark()" class="action-button" [ngClass]="{'selected': loanBool}">LOAN SHARK</button>
+                        <button (click)="openCasino()" class="action-button" [ngClass]="{'selected': casinoBool}">CASINO</button>
                         <button (click)="waitADay()" class="action-button">WAIT A DAY</button>
                     </div>
                     <div class="status-container" #statusContainer>
