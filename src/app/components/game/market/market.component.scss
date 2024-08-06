@@ -63,7 +63,7 @@ tr {
 
 .inventory-tbody {
     display: block;
-    max-height: 170px;
+    height: auto;
     width: 100%;
     overflow-y: auto;
     overflow-x: auto;
@@ -71,7 +71,7 @@ tr {
 
 .market-tbody {
     display: block;
-    max-height: 340px;
+    height: auto;
     width: 100%;
     overflow-y: auto;
     overflow-x: auto;
