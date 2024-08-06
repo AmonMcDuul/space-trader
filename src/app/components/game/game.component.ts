@@ -96,8 +96,6 @@ export class GameComponent implements AfterViewInit {
       new InventoryItem('Communications', 60, 1),
   ], seed.locations[2], seed.statusText);
     this.tempText = ""; 
-    console.log(seed.inventory);
-    console.log(this.gameState.inventory());
     this.typeWriter(this.gameState.statusText());
   }
 

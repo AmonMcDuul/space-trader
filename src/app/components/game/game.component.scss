@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height:  100vh;
+    height:  100%;
     width:  100vw; 
 }
 
@@ -285,7 +285,7 @@ tr:hover {
   }
 
   /* For mobile devices */
-@media (max-width: 900px), (max-height: 860px) {
+@media (max-width: 900px), (max-height: 600px) {
     .viewport {
       height: auto;
       width: 100%;
@@ -329,13 +329,13 @@ tr:hover {
   
     .top-right-container {
       flex-direction: column;
-      max-height: 600px;
-      min-height: 600px;
+      max-height: 580px;
+      min-height: 580px;
     }
 
     .action-container{
-      max-height: 200px;
-      min-height: 200px;
+      max-height: 210px;
+      min-height: 210px;
       width: 100%;
       padding: 10px 0;
     }

@@ -41,8 +41,8 @@ export class MarketComponent {
   }
 
   maxQuantity(price: number, quantity: number){
-    let max = (this.gameState.balance() / price);
-    if(max < quantity){
+    let max = Math.floor(this.gameState.balance() / price);    
+    if (max < quantity){
       return Number(max.toFixed(0));
     }
     return quantity;
@@ -57,6 +57,7 @@ export class MarketComponent {
   }
 
   setBuyQuantity(input: boolean){
+    this.maxBuySelected = false;
     if(input){
       this.buyQuantity++;
     }
@@ -66,6 +67,7 @@ export class MarketComponent {
   }
 
   setSellQuantity(input: boolean){
+    this.maxSellSelected = false;
     if(input){
       this.sellQuantity++;
     }

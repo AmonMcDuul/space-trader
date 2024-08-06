@@ -63,7 +63,7 @@ tr {
 
 .inventory-tbody {
     display: block;
-    height:max-content;
+    max-height: 170px;
     width: 100%;
     overflow-y: auto;
     overflow-x: auto;
@@ -71,7 +71,7 @@ tr {
 
 .market-tbody {
     display: block;
-    height:max-content;
+    max-height: 340px;
     width: 100%;
     overflow-y: auto;
     overflow-x: auto;
@@ -196,13 +196,17 @@ tr:hover {
     margin-right: 10px;
     justify-content: space-around;
 }
+.quantity-options-buttons{
+    display: flex;
+    flex-direction: row; 
+}
 
 .extra-space {
     min-width: 16px;
 }
 
   /* For mobile devices */
-  @media (max-width: 900px), (max-height: 860px) {
+  @media (max-width: 900px), (max-height: 600px) {
     .market-container {
       flex-direction: column;
     }
@@ -217,5 +221,22 @@ tr:hover {
     .inventory,
     .market {
       height: auto;
+    }
+
+    .quantity-options{
+        width: 20%;
+        flex-direction: column;
+    }
+
+    .quantity-options-buttons{
+        display: flex;
+        flex-direction: row; 
+    }
+    .inventory-tbody {
+        max-height: 400px;
+    }
+    
+    .market-tbody {
+        max-height: 400px;
     }
 }

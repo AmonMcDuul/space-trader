@@ -166,6 +166,8 @@ export class GameStateService {
                   this.balance.update(balance => balance - (item.price));
                 }
               }
+              this.setStatusText(`You have bought ${quantity} of ${item.name}.\n`);
+              return;
             } else{
               this.inventory.update(inventory => [...inventory, { name: item.name, price: item.price, quantity: quantity }]);
               this.inventory().sort((a, b) => {
@@ -259,7 +261,6 @@ export class GameStateService {
       marketItem.price = Math.round(marketItem.price * multiplier);
       this.specialFireSale.set(marketItem.name)
       this.specialPrint += `${this.specialFireSale()} IS ON FIRESALE!!!!\n`
-      // this.setStatusText(`${this.specialFireSale()} IS ON FIRESALE!!!!\n`)
       };
     
     if(chanceScarcity >= 7){
@@ -268,7 +269,6 @@ export class GameStateService {
       marketItem.price = Math.round(marketItem.price * multiplier);
       this.specialScarcity.set(marketItem.name)
       this.specialPrint += `${this.specialScarcity()} IS SCARSE!!!!\n`
-      // this.setStatusText(`${this.specialScarcity()} IS SCARSE!!!!\n`)
     }
   }
 
@@ -294,7 +294,6 @@ export class GameStateService {
   checkSpecialDelivery(previous: SpecialDelivery){
     if(previous.count === 0 && previous.name != "Pending.."){
       this.specialPrint += "SPS - Failed to deliver special parcel. \n You get a $500 fine.\n"
-      // this.setStatusText("SPS - Failed to deliver special parcel. \n You get a $500 fine.\n")
       this.balance.update(balance => balance - 500);
       this.createRandomSpecialDelivery(previous);
     }
@@ -305,11 +304,9 @@ export class GameStateService {
       previous.countDown();
       if(previous.name != "Pending.."){
         this.specialPrint += `SPS - You have ${this.specialDelivery().count} days left to deliver ${this.specialDelivery().name} to ${this.specialDelivery().destination}...\n`
-        // this.setStatusText(`SPS - You have ${this.specialDelivery().count} days left to deliver ${this.specialDelivery().name} to ${this.specialDelivery().destination}...\n`)
       }
       else{
         this.specialPrint += `SPS - No package to deliver.\n`
-        // this.setStatusText(`SPS - No package to deliver.\n`)
       }
     }
   }
@@ -338,7 +335,6 @@ export class GameStateService {
     
     this.specialDelivery.update(sd => new SpecialDelivery(name, destination, price));
     this.specialPrint += `A new delivery is ready.\n Please deliver ${this.specialDelivery().name} to ${this.specialDelivery().destination}...\n`
-    // this.setStatusText(`A new delivery is ready.\n Please deliver ${this.specialDelivery().name} to ${this.specialDelivery().destination}...\n`)
     return;
   }
 
