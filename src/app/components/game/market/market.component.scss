@@ -205,7 +205,7 @@ tr:hover {
     min-width: 16px;
 }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1200px) {
     .quantity-options{
         width: 20%;
         flex-direction: column;
@@ -230,17 +230,7 @@ tr:hover {
       padding: 10px 0;
       height: auto;
     }
-
-    .quantity-options{
-        width: 20%;
-        flex-direction: column;
-    }
-
-    .quantity-options-buttons{
-        display: flex;
-        flex-direction: row; 
-    }
-
+    
     .inventory-tbody {
         max-height: 400px;
     }
