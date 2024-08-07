@@ -20,12 +20,11 @@
             <app-highscore></app-highscore>
         </div>
         <div class="options-container" *ngIf="showOptionsPanel">
-            <div>
-                <label for="themeSelector">SeLect TheMe:</label><br>
-                <select id="themeSelector" [(ngModel)]="selectedTheme" (change)="onThemeChange($event)">
-                  <option *ngFor="let theme of themeOptions" [value]="theme">{{ theme | titlecase }}</option>
-                </select>
-              </div>
+            <div class="theme-buttons">
+                <button class="game-length-button" *ngFor="let theme of themeOptions" [class.selected]="selectedTheme === theme" (click)="setTheme(theme)">
+                    {{ theme }}
+                </button>
+            </div>
             <h3>GAMe lenGth</h3>
             <div class="game-length-buttons">
                 <button class="game-length-button" *ngFor="let option of gameLengthOptions"

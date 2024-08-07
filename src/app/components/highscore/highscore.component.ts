@@ -25,7 +25,7 @@ export class HighscoreComponent {
     }, error => {
       console.error('Error fetching high scores', error);
     });
-    // this.highScores = this.getDummyHighScores();
+    this.highScores = this.getDummyHighScores();
     this.filterHighScores();
   }
 

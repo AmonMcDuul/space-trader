@@ -21,14 +21,14 @@ export class HomeComponent {
   showHighScoresPanel = false;
   gameLength = 30;
   gameLengthOptions = [15, 30, 60, 90];
-  selectedTheme: string = 'light';
+  selectedTheme: string = 'space';
   themeOptions: string[] = [
+    'space', 
     'light', 
     'dark', 
     'matrix', 
     'desert', 
     'cyberpunk', 
-    'space', 
   ];
     faCircleHalfStroke = faCircleHalfStroke;
 
@@ -37,7 +37,7 @@ export class HomeComponent {
   ngOnInit() {
     if (typeof window !== 'undefined') {
       const storedTheme = localStorage.getItem('selectedTheme');
-      this.selectedTheme = storedTheme ? storedTheme : 'light';
+      this.selectedTheme = storedTheme ? storedTheme : 'space';
       this.themeService.set(this.selectedTheme);
     }
   }
@@ -86,12 +86,5 @@ export class HomeComponent {
 
   toggleTheme() {
     this.themeService.change();
-  }
-
-  onThemeChange(event: Event) {
-    const target = event.target as HTMLSelectElement; // Type assertion
-    if (target) {
-      this.setTheme(target.value);
-    }
   }
 }

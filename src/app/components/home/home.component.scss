@@ -133,3 +133,22 @@
   .icon {
     font-size: 24px;
   }
+
+    /* For mobile devices */
+    @media (max-width: 900px), (max-height: 600px) {
+      .viewport{
+        align-items:start;
+        height: 100%;
+    }
+
+    .main-container {
+      height: 100%;
+      min-height: 95vh;
+  }
+
+    .theme-buttons{
+      display: flex;
+      flex-wrap: wrap;
+      padding: 10px;
+    }
+  }  
