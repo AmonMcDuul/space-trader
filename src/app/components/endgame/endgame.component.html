@@ -1,0 +1,31 @@
+<div class="viewport">
+    <div class="main-container">
+      <div class="head-container">
+        <h1>SPACE TRADER</h1>
+        <div class="header-line"></div>
+        <div>
+          <button (click)="toggleTheme()" class="icon-button">
+            <fa-icon [icon]="faCircleHalfStroke" class="icon"></fa-icon>
+          </button>
+        </div>
+      </div>
+      
+      <div class="content-container">
+        <h2 class="MajorMonoDisplay">GAME ENDED</h2>
+        <p>You scored: {{ gameState.balance() }}</p>
+        <p class="MajorMonoDisplay">Enter your ALIAS to submit your highscore:</p>
+        <form (ngSubmit)="onSubmit()" #usernameForm="ngForm" class="form-container">
+            <input class="general-input" id="username" [(ngModel)]="username" name="username" required maxlength="7">
+            <button class="general-button" type="submit">Submit Score</button>
+            </form>
+            <small>Alias can't be longer than 7 chars</small>
+            <h2 class="MajorMonoDisplay">THANK YOU FOR PLAYING SPACE TRADER!</h2>
+            </div>
+            <div class="credits-container">
+                <h3>CReATed bY</h3>
+                <h3>JORAN SchoLS, 2024</h3>
+            </div>
+        <button class="general-button" (click)="exit()">Return to home without submitting highscore</button>
+    </div>
+  </div>
+  
