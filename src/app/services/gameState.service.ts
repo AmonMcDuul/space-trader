@@ -91,14 +91,10 @@ export class GameStateService {
 
   endGame() {
     if (this.daysPassed() >= this.gameLength) {
-      this.gameScore = this.balance();
-      this.showModal = true;
+      //open modal
+      alert("game ended, you scored: " + this.balance())
+      this.router.navigate(['/']);
     }
-  }
-
-  closeModal() {
-    this.showModal = false;
-    this.router.navigate(['/']);
   }
 
   nextDay() {
