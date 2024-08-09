@@ -35,7 +35,8 @@ export class EndgameComponent {
       .subscribe(() => {
         this.router.navigate(['/']);
       }, error => {
-        console.error("Failed to submit score", error);
+        alert("Failed to submit score");
+        this.router.navigate(['/']);
       });
   }
 
