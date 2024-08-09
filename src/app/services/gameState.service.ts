@@ -47,8 +47,11 @@ export class GameStateService {
     new MarketItem('Hydroponics system', 400, 0),
   ]
   specialPrint: string = "";
+  
+  showModal = false;
+  gameScore = 0;
 
-  constructor(private router: Router, private apiService: ApiService) { }
+  constructor(private router: Router, private apiService: ApiService) {}
 
   CreateGameState(gameLength: number = 30,
     daysPassed: number = 0,
@@ -78,12 +81,17 @@ export class GameStateService {
       this.specialPrint = "";
     }
 
+
   endGame() {
     if (this.daysPassed() >= this.gameLength) {
-      //open modal
-      alert("game ended, you scored: " + this.balance())
-      this.router.navigate(['/']);
+      this.gameScore = this.balance();
+      this.showModal = true;
     }
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.router.navigate(['/']);
   }
 
   nextDay() {

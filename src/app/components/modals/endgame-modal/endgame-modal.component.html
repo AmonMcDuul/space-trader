@@ -1,0 +1,12 @@
+<div class="modal-overlay">
+    <div class="modal">
+      <h2>Game Over</h2>
+      <p>Your score: {{ score }}</p>
+      <label for="username">Enter your name:</label>
+      <input id="username" [(ngModel)]="username" maxlength="10" />
+      <div class="modal-actions">
+        <button (click)="submit()">Submit</button>
+        <button (click)="close()">Close</button>
+      </div>
+    </div>
+  </div>
