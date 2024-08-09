@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { HighScore } from '../../models/highscore';
 import { CommonModule } from '@angular/common';
@@ -8,9 +8,9 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './highscore.component.html',
-  styleUrl: './highscore.component.scss'
+  styleUrls: ['./highscore.component.scss']
 })
-export class HighscoreComponent {
+export class HighscoreComponent implements OnInit {
   highScores: HighScore[] = [];
   filteredHighScores: HighScore[] = [];
   selectedTab: number = 0;
@@ -21,12 +21,12 @@ export class HighscoreComponent {
   ngOnInit(): void {
     this.apiService.getHighScore().subscribe((data: HighScore[]) => {
       this.highScores = data;
-      console.log(data);
+      this.filterHighScores();
     }, error => {
       console.error('Error fetching high scores', error);
+      this.highScores = this.getDummyHighScores();
+      this.filterHighScores();
     });
-    this.highScores = this.getDummyHighScores();
-    this.filterHighScores();
   }
 
   getDummyHighScores(): HighScore[] {
@@ -43,6 +43,7 @@ export class HighscoreComponent {
       new HighScore('Player10', 1100, 3),
     ];
   }
+
   selectTab(tabIndex: number): void {
     this.selectedTab = tabIndex;
     this.filterHighScores();
