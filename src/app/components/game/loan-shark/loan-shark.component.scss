@@ -38,3 +38,9 @@
     font-family: 'MajorMonoDisplay', monospace;
   }
   
+    /* For mobile devices */
+    @media (max-width: 900px), (max-height: 600px) {
+      .loan-sharks {
+        flex-direction: column;
+      }
+    }
