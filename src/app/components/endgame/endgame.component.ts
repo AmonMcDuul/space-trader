@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
 })
 export class EndgameComponent {
   username: string = '';
-  gamestate: number = 0;
+  gameMode: number = 0;
   faCircleHalfStroke = faCircleHalfStroke;
 
   private gameLengthToStateMap = new Map<number, number>([
@@ -30,8 +30,8 @@ export class EndgameComponent {
   constructor(public gameState: GameStateService, private apiservice: ApiService, private router: Router, protected themeService: ThemeService) { }
 
   onSubmit() {
-    this.gamestate = this.gameLengthToStateMap.get(this.gameState.gameLength) ?? 0;
-    this.apiservice.sendHighScore(this.gameState.balance(), this.username, this.gamestate)
+    this.gameMode = this.gameLengthToStateMap.get(this.gameState.gameLength()) ?? 0;
+    this.apiservice.sendHighScore(this.gameState.balance(), this.username, this.gameMode)
       .subscribe(() => {
         this.router.navigate(['/']);
       }, error => {

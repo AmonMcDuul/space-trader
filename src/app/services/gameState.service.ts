@@ -14,7 +14,7 @@ import { LoanShark } from '../models/loanShark';
   providedIn: 'root'
 })
 export class GameStateService {
-  gameLength: number = 30;
+  gameLength = signal(30);
   daysPassed = signal(0);
   balance = signal(0);
   loan = signal(0);
@@ -69,7 +69,7 @@ export class GameStateService {
     inventory: InventoryItem[] = [],
     currentLocation: Location,
     statusText: string){
-      this.gameLength = gameLength;
+      this.gameLength.set(gameLength);
       this.daysPassed.set(daysPassed);
       this.balance.set(balance);
       this.fuel.set(fuel);
@@ -92,14 +92,14 @@ export class GameStateService {
 
 
   endGame() {
-    if (this.daysPassed() >= this.gameLength) {
+    if (this.daysPassed() >= this.gameLength()) {
       this.router.navigate(['/endgame']);
     }
   }
 
   nextDay() {
     this.daysPassed.update(days => days + 1);
-    if(this.daysPassed() > this.gameLength){
+    if(this.daysPassed() > this.gameLength()){
         this.endGame();
     }
     this.updateLoanShark();
