@@ -24,16 +24,16 @@ export class EndgameComponent {
 
   onSubmit() {
     if(this.gameState.gameLength() == 15){
-      this.gameMode == 0;
+      this.gameMode = 0;
     }
     if(this.gameState.gameLength() == 30){
-      this.gameMode == 1;
+      this.gameMode = 1;
     }
     if(this.gameState.gameLength() == 60){
-      this.gameMode == 2;
+      this.gameMode = 2;
     }
     if(this.gameState.gameLength() == 90){
-      this.gameMode == 3;
+      this.gameMode = 3;
     }
     this.apiservice.sendHighScore(this.gameState.balance(), this.username, this.gameMode)
       .subscribe(() => {
