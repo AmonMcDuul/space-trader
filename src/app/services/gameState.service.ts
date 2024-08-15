@@ -54,6 +54,7 @@ export class GameStateService {
   
   showModal = false;
   gameScore = 0;
+  casinoPlaysADay = signal(0);
 
   constructor(private router: Router, private apiService: ApiService) {}
 
@@ -86,6 +87,7 @@ export class GameStateService {
       this.loan.set(0)
       this.interestRate.set(0);
       this.chosenLoanShark.set(new LoanShark("",0,0,false))
+      this.casinoPlaysADay.set(10);
     }
 
 
@@ -106,6 +108,7 @@ export class GameStateService {
     this.checkSpecialDelivery(this.specialDelivery());
     this.setStatusText(this.specialPrint);
     this.specialPrint = "";
+    this.casinoPlaysADay.set(10);
   }
 
   travel(location: Location) {
@@ -157,6 +160,7 @@ export class GameStateService {
               inventoryItem.quantity = inventoryItem.quantity + quantity;
           } else {
             if(item.name === "Fuel"){
+              //weird fuel hacks
               for(let i = 1; i <= quantity; i++){
                 if(this.fuel() >= 10){
                   this.setStatusText(`You have bought ${i} amount of fuel.\n` + "You can't store any more fuel, it's just spilling away\n")
@@ -197,9 +201,9 @@ export class GameStateService {
       const marketItem = this.marketItems().find(i => i.name === item.name);
       inventoryItem.quantity = inventoryItem.quantity - quantity;
       if (marketItem) {
-          marketItem.quantity = inventoryItem.quantity + quantity;
+          marketItem.quantity = marketItem.quantity + quantity;
       } else {
-        this.marketItems.update(marketItems => [...marketItems, { name: item.name, price: item.price, quantity: 1 }]);
+        this.marketItems.update(marketItems => [...marketItems, { name: item.name, price: item.price, quantity: quantity }]);
       }
       this.balance.update(balance => balance + (item.price * quantity));
       this.setStatusText(`You have sold ${quantity} of ${item.name}.\n`);

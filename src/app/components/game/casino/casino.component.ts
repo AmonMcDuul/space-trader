@@ -40,6 +40,7 @@ export class CasinoComponent {
   playGame(game: Game) {
     if (this.betAmount > 0 && this.betAmount <= this.gameState.balance()) {
       game.play(this.betAmount);
+      this.gameState.casinoPlaysADay.update(v => v - 1);
     } else {
       this.result = 'Please enter a valid bet amount.';
       this.gameState.setStatusText('Please enter a valid bet amount. \n');
