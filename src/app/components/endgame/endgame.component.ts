@@ -20,17 +20,21 @@ export class EndgameComponent {
   gameMode: number = 0;
   faCircleHalfStroke = faCircleHalfStroke;
 
-  private gameLengthToStateMap = new Map<number, number>([
-    [15, 0],
-    [30, 1],
-    [60, 2],
-    [90, 3]
-  ]);
-
   constructor(public gameState: GameStateService, private apiservice: ApiService, private router: Router, protected themeService: ThemeService) { }
 
   onSubmit() {
-    this.gameMode = this.gameLengthToStateMap.get(this.gameState.gameLength()) ?? 0;
+    if(this.gameState.gameLength() == 15){
+      this.gameMode == 0;
+    }
+    if(this.gameState.gameLength() == 30){
+      this.gameMode == 1;
+    }
+    if(this.gameState.gameLength() == 60){
+      this.gameMode == 2;
+    }
+    if(this.gameState.gameLength() == 90){
+      this.gameMode == 3;
+    }
     this.apiservice.sendHighScore(this.gameState.balance(), this.username, this.gameMode)
       .subscribe(() => {
         this.router.navigate(['/']);
