@@ -134,6 +134,10 @@
     font-size: 24px;
   }
 
+  .url{
+    color: var(--text-color);
+  }
+
     /* For mobile devices */
     @media (max-width: 900px), (max-height: 600px) {
       .viewport{
