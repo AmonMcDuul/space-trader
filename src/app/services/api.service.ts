@@ -19,10 +19,10 @@ export class ApiService {
     );
   }
 
-  sendHighScore(score: number, alias: string, gameState: number): Observable<any> {
+  sendHighScore(score: number, alias: string, gameTypeState: number): Observable<any> {
     const url = `${this.apiUrl}/SpaceTrader/highscore`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const payload = { score, alias, gameState };
+    const payload = { score, alias, gameTypeState };
 
     return this.http.post<any>(url, payload, { headers }).pipe(
       catchError(this.handleError)
