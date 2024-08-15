@@ -24,7 +24,7 @@ export class HighscoreComponent implements OnInit {
       this.filterHighScores();
     }, error => {
       console.error('Error fetching high scores', error);
-      this.highScores = this.getDummyHighScores();
+      // this.highScores = this.getDummyHighScores();
       this.filterHighScores();
     });
   }
@@ -50,9 +50,11 @@ export class HighscoreComponent implements OnInit {
   }
 
   filterHighScores(): void {
-    this.filteredHighScores = this.highScores.filter(highScore => highScore.gameTypeState === this.selectedTab);
+    this.filteredHighScores = this.highScores
+      .filter(highScore => highScore.gameTypeState === this.selectedTab)
+      .sort((a, b) => b.score - a.score);
   }
-
+  
   getTabText(gametype: number): string {
     switch (gametype) {
       case 0: return '15 days';
