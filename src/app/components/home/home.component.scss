@@ -237,7 +237,7 @@
 
     h1 {
         font-size: 2.5rem;
-        background: linear-gradient(90deg, #ffffff, #a5b8ff);
+        background: linear-gradient(90deg, #ffffff, var(--highlight));
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -305,7 +305,7 @@
     z-index: 2;
     
     h3 {
-        color: #a5b8ff;
+        color: var(--highlight);
         margin: 20px 0;
         text-transform: uppercase;
         letter-spacing: 2px;
@@ -340,7 +340,7 @@
     
     &:hover {
         background-color: rgba(65, 100, 255, 0.2);
-        border-color: #a5b8ff;
+        border-color: var(--highlight);
         color: #ffffff;
         box-shadow: 0 0 15px rgba(65, 100, 255, 0.3);
     }
@@ -348,7 +348,7 @@
     &.selected {
         background-color: #4164ff;
         color: #ffffff;
-        border-color: #a5b8ff;
+        border-color: var(--highlight);
         box-shadow: 0 0 20px rgba(65, 100, 255, 0.5);
     }
 }
@@ -362,7 +362,7 @@
     z-index: 2;
     
     h3, h4 {
-        color: #a5b8ff;
+        color: var(--highlight);
         margin: 10px 0;
         text-align: center;
     }
@@ -377,7 +377,7 @@
     z-index: 2;
     
     h3 {
-        color: #a5b8ff;
+        color: var(--highlight);
         margin-bottom: 20px;
         text-transform: uppercase;
         letter-spacing: 2px;
@@ -405,7 +405,7 @@
     background-color: transparent;
     padding: 5px;
     margin: 10px 0px 10px 10px;
-    color: #a5b8ff;
+    color: var(--highlight);
     opacity: 0.5;
     transition: all 0.3s ease;
     
@@ -421,7 +421,7 @@
 }
 
 .url {
-    color: #a5b8ff;
+    color: var(--highlight);
     text-decoration: none;
     margin: 15px 0;
     transition: all 0.3s ease;
