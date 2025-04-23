@@ -93,7 +93,6 @@ export class GameStateService {
 
   endGame() {
     if (this.daysPassed() >= this.gameLength()) {
-      this.balance.update(v => v - this.loan());
       this.router.navigate(['/endgame']);
     }
   }
