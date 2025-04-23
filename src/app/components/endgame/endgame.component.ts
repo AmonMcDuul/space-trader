@@ -35,7 +35,7 @@ export class EndgameComponent {
     if(this.gameState.gameLength() == 90){
       this.gameMode = 3;
     }
-    this.apiservice.sendHighScore((this.gameState.balance() - this.gameState.loan()), this.username, this.gameMode)
+    this.apiservice.sendHighScore(this.gameState.highScore(), this.username, this.gameMode)
       .subscribe(() => {
         this.router.navigate(['/']);
       }, error => {

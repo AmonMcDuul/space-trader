@@ -19,6 +19,7 @@ export class GameStateService {
   balance = signal(0);
   loan = signal(0);
   interestRate = signal(0);
+  highScore = signal(0);
   chosenLoanShark = signal(new LoanShark("",0,0,false))
   fuel = signal(0);
   shield = signal(new Shield("", 0));
@@ -88,6 +89,7 @@ export class GameStateService {
       this.interestRate.set(0);
       this.chosenLoanShark.set(new LoanShark("",0,0,false))
       this.casinoPlaysADay.set(10);
+      this.highScore.set(0);
     }
 
 
@@ -100,6 +102,7 @@ export class GameStateService {
   nextDay() {
     this.daysPassed.update(days => days + 1);
     if(this.daysPassed() > this.gameLength()){
+      this.highScore.set(this.balance() - this.loan());
         this.endGame();
     }
     this.updateLoanShark();
