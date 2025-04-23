@@ -17,6 +17,8 @@
         <form (ngSubmit)="onSubmit()" #usernameForm="ngForm" class="form-container">
             <input class="general-input" id="username" [(ngModel)]="username" name="username" required maxlength="7">
             <button class="general-button" type="submit">Submit Score</button>
+            <hr>
+            <button class="general-button" (click)="exit()">Return to home without submitting highscore</button>
             </form>
             <small>Alias can't be longer than 7 chars</small>
             <h2 class="MajorMonoDisplay">THANK YOU FOR PLAYING SPACE TRADER!</h2>
@@ -27,7 +29,6 @@
                 <a class="url" href="https:flamsoft.nl/" target="_blank">MORE INFO</a>
                 <h4>VERSION 1.1</h4>
             </div>
-        <button class="general-button" (click)="exit()">Return to home without submitting highscore</button>
     </div>
   </div>
   
