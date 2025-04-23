@@ -102,7 +102,8 @@ export class GameStateService {
   nextDay() {
     this.daysPassed.update(days => days + 1);
     if(this.daysPassed() > this.gameLength()){
-      this.highScore.set(this.balance() - this.loan());
+      const rawScore = this.balance() - this.loan();
+      this.highScore.set(Math.round(rawScore)); 
         this.endGame();
     }
     this.updateLoanShark();
